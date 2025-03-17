@@ -110,6 +110,34 @@ CREATE TABLE test_step_executions (
     FOREIGN KEY (step_id) REFERENCES test_steps(step_id),
     FOREIGN KEY (comment_id) REFERENCES comments(comment_id)
 );
+--Add projects to data schema
+-- Create the Projects table
+CREATE TABLE projects (
+    project_id VARCHAR(36) PRIMARY KEY DEFAULT NEWID(),
+    name VARCHAR(255) UNIQUE NOT NULL,
+    description TEXT,
+    created_by VARCHAR(36),
+    created_at DATETIME DEFAULT GETDATE(),
+    is_deleted BIT DEFAULT 0,
+    FOREIGN KEY (created_by) REFERENCES users(user_id)
+);
+
+-- Add project_id to test_suites table
+ALTER TABLE test_suites 
+ADD project_id VARCHAR(36);
+
+-- Add foreign key constraint for project_id in test_suites
+ALTER TABLE test_suites
+ADD CONSTRAINT fk_test_suites_project FOREIGN KEY (project_id) REFERENCES projects(project_id);
+
+-- Add project_id to test_runs table
+ALTER TABLE test_runs 
+ADD project_id VARCHAR(36);
+
+-- Add foreign key constraint for project_id in test_runs
+ALTER TABLE test_runs
+ADD CONSTRAINT fk_test_runs_project FOREIGN KEY (project_id) REFERENCES projects(project_id);
+
 
 
 
