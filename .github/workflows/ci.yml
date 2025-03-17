@@ -44,4 +44,4 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests
-        run: ng test --code-coverage
+        run: npm test -- --coverage
