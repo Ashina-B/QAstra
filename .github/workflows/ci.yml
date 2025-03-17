@@ -43,6 +43,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Unit Tests
-        run: npm test -- --code-coverage
+      - name: Run Unit Tests with Coverage
+        run: npm test -- --code-coverage --browsers=ChromeHeadless --watch=false
+
 
