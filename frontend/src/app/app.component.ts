@@ -1,4 +1,4 @@
-import { inject, Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './services/api.service';
 import { CommonModule } from '@angular/common';
@@ -12,15 +12,22 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'QAstra';
-  private apiservice = inject(ApiService);
   users:any[] = []
 
-  constructor() {
-    this.apiservice.getUsers().subscribe(data => {
-      console.log('API Response:', data);
-      this.users = data;
-    }, error => {
-      console.error('API Error:', error);
-    });
+  constructor(private apiservice: ApiService){
+    this.getUsers()
   }
+
+  getUsers() {
+    this.apiservice.getUsers().subscribe(data => this.users = data)
+  }
+
+  // constructor() {
+    // this.apiservice.getUsers().subscribe(data => {
+    //   console.log('API Response:', data);
+    //   this.users = data;
+    // }, error => {
+    //   console.error('API Error:', error);
+    // });
+  // }
 }
