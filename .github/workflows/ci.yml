@@ -41,9 +41,11 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
+        working-directory: frontend
         run: npm install
 
       - name: Run Unit Tests with Coverage
-        run: npm test -- --code-coverage --browsers=ChromeHeadless --watch=false
+        working-directory: frontend
+        run:  npm test -- --code-coverage --browsers=ChromeHeadless --watch=false
 
 

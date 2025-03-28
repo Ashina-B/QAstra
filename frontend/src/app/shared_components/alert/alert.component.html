@@ -1,0 +1,23 @@
+<div class="alert" *ngIf="isVisible">
+    <div class="card" [ngClass]="[cardClass, typeClass()]" *ngIf="isVisible">
+        @if (showHeader) {
+          <div class="d-flex align-items-center justify-content-between" [ngClass]="headerClass">
+            <div>
+              <h5 class="mb-0"><b>{{ cardTitle}}</b></h5>
+              <ng-container *ngTemplateOutlet="headerTitleTemplate"></ng-container>
+            </div>
+            <ng-container *ngTemplateOutlet="headerOptionsTemplate"></ng-container>
+          </div>
+        }
+        @if (showContent) {
+          <div class="card-body" [ngClass]="blockClass" [style.padding.px]="padding">
+            <span class="block sm:inline">{{ message }}</span>
+            <ng-content></ng-content>
+          </div>
+          <div>
+              <button class="close-btn btn btn-primary" (click)="closeMessage()">Close</button>
+          </div>
+        }
+      </div>
+</div>
+

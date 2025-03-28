@@ -1,0 +1,60 @@
+<div class="auth-main">
+  <app-alert></app-alert>
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        <div class="auth-header">
+          <a href="javascript:"><img src="assets/images/logo-dark.svg" alt="logo img"/></a>
+        </div>
+        <div class="card my-5">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+              <h3 class="mb-0"><b>Sign up</b></h3>
+              <a [routerLink]="['/login']" class="link-primary">Already have an account?</a>
+            </div>
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                <div class="form-group mb-3">
+                  <div class="error-message" *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
+                    <span>A valid username is required</span>
+                  </div>
+                  <label class="form-label" for="username">Username*</label>
+                  <input type="text" class="form-control" formControlName = "username" id="username" placeholder="Jane Doe" />
+                </div>
+                <div class="form-group mb-3">
+                  <div class="error-message" *ngIf="registrationForm.get('emailAddress')?.invalid && registrationForm.get('emailAddress')?.touched">
+                    <span>A valid email Address is required</span>
+                  </div>
+                  <label class="form-label" for="emailAddress">Email Address*</label>
+                  <input type="email" class="form-control" formControlName = "emailAddress" id="emailAddress" placeholder="Email Address" />
+                </div>
+                <div class="form-group mb-3">
+                  <div class="error-message" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+                    <span>A valid password is required</span>
+                  </div>
+                  <label class="form-label" for="password">Password*</label>
+                  <input type="password" class="form-control" formControlName = "password" id="password" placeholder="Password" />
+                </div>
+                <!-- <p class="mt-4 text-sm text-muted">
+                  By Signing up, you agree to our
+                  <a href="javascript:" class="text-primary">Terms of Service</a>
+                  and
+                  <a href="javascript:" class="text-primary">Privacy Policy</a>
+                </p> -->
+                <div class="d-grid mt-3">
+                  <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || registrationForm.invalid">Create Account</button>
+                </div>
+                <div class="error-message" *ngIf="errorMessage">
+                  <span>{{errorMessage}}</span>
+                </div>
+              </form>
+          </div>
+        </div>
+        <div class="auth-footer row">
+          <div class="col-auto my-1">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
