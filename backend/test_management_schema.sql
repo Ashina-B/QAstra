@@ -138,6 +138,15 @@ ADD project_id VARCHAR(36);
 ALTER TABLE test_runs
 ADD CONSTRAINT fk_test_runs_project FOREIGN KEY (project_id) REFERENCES projects(project_id);
 
+--Add isActive and activation token columns
+ALTER TABLE users 
+ADD is_active BIT DEFAULT 0;
+
+ALTER TABLE users 
+ADD activation_token VARCHAR(255);
+
+
+
 
 
 
