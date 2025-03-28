@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChild, ElementRef, input, Input, TemplateRef } from '@angular/core';
+import { Component, ContentChild, ElementRef, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-alert',
