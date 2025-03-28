@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
+import { provideRouter } from '@angular/router';
+import { UsersService } from '../../services/users.service';
+import { EmailService } from '../../services/email.service';
+import { HttpClient } from '@angular/common/http';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
@@ -8,6 +12,12 @@ describe('RegistrationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: HttpClient, useValue: {} },
+        provideRouter([]), 
+        UsersService,
+        EmailService
+        ],
       imports: [RegistrationComponent]
     })
     .compileComponents();
