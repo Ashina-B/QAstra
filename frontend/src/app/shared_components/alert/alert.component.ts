@@ -1,9 +1,5 @@
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { Component, ContentChild, ElementRef, TemplateRef } from '@angular/core';
-=======
-import { Component, ContentChild, ElementRef, input, Input, TemplateRef } from '@angular/core';
->>>>>>> 8b138ea (Completed Registration functionality.)
 
 @Component({
   selector: 'app-alert',

@@ -1,10 +1,6 @@
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
 import { of } from 'rxjs';
-=======
-import { Observable, of } from 'rxjs';
->>>>>>> 8b138ea (Completed Registration functionality.)
 import { isPlatformBrowser } from '@angular/common';
 
 

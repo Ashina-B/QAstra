@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-=======
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
->>>>>>> 8b138ea (Completed Registration functionality.)
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { EmailService } from '../../services/email.service';
