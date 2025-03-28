@@ -46,8 +46,6 @@ jobs:
 
       - name: Run Unit Tests with Coverage
         working-directory: frontend
-        run: |
-          cd frontend
-          npm test -- --code-coverage --browsers=ChromeHeadless --watch=false
+        run:  npm test -- --code-coverage --browsers=ChromeHeadless --watch=false
 
 
