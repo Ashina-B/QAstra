@@ -44,6 +44,8 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests with Coverage
-        run: npm test -- --code-coverage --browsers=ChromeHeadless --watch=false
+        run: |
+          cd frontend
+          npm test -- --code-coverage --browsers=ChromeHeadless --watch=false
 
 
