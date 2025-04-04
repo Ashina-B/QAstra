@@ -1,0 +1,87 @@
+.auth-main {
+    position: relative;
+}
+
+.auth-main .auth-wrapper {
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.auth-main .auth-wrapper .auth-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 24px;
+    position: relative;
+    justify-content: space-between;
+}
+
+.auth-main .auth-wrapper .auth-form > * {
+    position: relative;
+    z-index: 5;
+}
+
+.auth-main .auth-wrapper .auth-form::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(16px);
+}
+
+.auth-main .auth-wrapper .auth-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.auth-main .auth-wrapper .auth-header img {
+    max-width: 150px;
+}
+
+.auth-main .auth-wrapper .auth-form .card {
+    width: 100%;
+    max-width: 495px;
+    box-shadow: none;
+}
+
+.auth-main .auth-wrapper .auth-form .card-body {
+    padding: 20px;
+}
+
+.auth-main .auth-wrapper .auth-form h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.auth-main .auth-wrapper .auth-form p {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.auth-main .auth-wrapper .auth-form .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.auth-main .auth-wrapper .auth-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}

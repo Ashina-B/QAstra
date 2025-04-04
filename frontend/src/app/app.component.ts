@@ -1,12 +1,12 @@
 import { Component} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ApiService } from './services/api.service';
 import { CommonModule } from '@angular/common';
+import { Router, RouterOutlet } from '@angular/router';
+import { AlertComponent } from './shared_components/alert/alert.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [CommonModule, RouterOutlet, AlertComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -14,12 +14,12 @@ export class AppComponent {
   title = 'QAstra';
   users:any[] = []
 
-  constructor(private apiservice: ApiService){
-    this.getUsers()
+  constructor(private router: Router){
   }
 
-  getUsers() {
-    this.apiservice.getUsers().subscribe(data => this.users = data)
+
+  redirectToRegistration(){
+    this.router.navigate(['/register'])
   }
 
   // constructor() {
