@@ -1,6 +1,6 @@
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
 
@@ -16,12 +16,17 @@ export class EmailService {
     
   }
 
- sendRegistrationEmail(recipient: string, token:string) {
+ sendRegistrationEmail(recipient: string, token:string): Observable<any> {
     if (isPlatformBrowser(this.platformId)){
-      return this.http.post(`${this.apiUrl}/registration_email`,  { recipient, token }).subscribe({
-        next: (res) => console.log('Email sent successfully:', res),
-        error: (err) => console.error('Error sending email:', err)
-      })
+      return this.http.post(`${this.apiUrl}/registration_email`,  { recipient, token })
+      }else{
+        return of([])
+        }
+  }
+
+  resendActivationLink(recipient:string, token:string): Observable<any>{
+    if (isPlatformBrowser(this.platformId)){
+      return this.http.post(`${this.apiUrl}/resend_activation_email`,  { recipient, token })
       }else{
         return of([])
         }

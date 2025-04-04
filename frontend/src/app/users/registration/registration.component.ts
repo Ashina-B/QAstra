@@ -78,8 +78,8 @@ export class RegistrationComponent {
           this.errorMessage = error?.error?.message;
           this.appAlert.showAlert(
             'Registration Failed ❌', 
-            'Error: '+this.errorMessage, 
-            'success' )
+            this.errorMessage, 
+            'error' )
         },
       })
     } else {

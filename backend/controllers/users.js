@@ -35,18 +35,18 @@ exports.registerUser = async(req, res) => {
         }
 
 
-        const existingUsername = await pool.request()
-        .input('username', username)
-        .query('SELECT * FROM users WHERE username = @username');
-        if (existingUsername.recordset.length > 0) {
-            return res.status(400).json({ message: "Username already in use" });
-        }
-
         const existingEmail = await pool.request()
         .input('email', email)
         .query('SELECT * FROM users WHERE email = @email');
         if (existingEmail.recordset.length > 0) {
             return res.status(400).json({ message: "Email already in use" });
+        }
+        
+        const existingUsername = await pool.request()
+        .input('username', username)
+        .query('SELECT * FROM users WHERE username = @username');
+        if (existingUsername.recordset.length > 0) {
+            return res.status(400).json({ message: "Username already in use" });
         }
 
         //hash the password
@@ -120,4 +120,37 @@ exports.activateAccount = async(req, res) => {
             action: "Resend Activation Link"
         });
     }
+}
+
+exports.removeUser = async(req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: "Email is required" });
+    }
+
+    const pool = await poolPromise;
+
+    const exists = await pool.request()
+        .input('email', email)
+        .query('SELECT * FROM users WHERE email = @email');
+
+    if (exists.recordset.length === 0) {
+        return res.status(400).json({ message: "User does not exist" });
+    }
+
+    await pool.request()
+        .input('email', email)
+        .query('DELETE FROM users WHERE email = @email');
+
+    const user = await pool.request()
+        .input('email', email)
+        .query('SELECT * FROM users WHERE email = @email');
+
+    if (user.recordset.length === 0) {
+        return res.status(200).json({ message: "User removed successfully" });
+    } else {
+        return res.status(400).json({ message: "User was not removed" });
+    }
+
 }

@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { EmailService } from '../../services/email.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AlertComponent } from '../../shared_components/alert/alert.component';
 
 @Component({
   selector: 'app-account-activation',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, AlertComponent],
   templateUrl: './account-activation.component.html',
   styleUrl: './account-activation.component.css'
 })
@@ -16,19 +18,24 @@ export class AccountActivationComponent {
   title!:string;
   message!: string;
   action!:string;
+  resendActivationLinkForm!: FormGroup
+  errormessage!:string;
+  token: string | null = null;
+  @ViewChild(AlertComponent) appAlert!: AlertComponent;
 
   constructor(
     private userService: UsersService,
     private route: ActivatedRoute,
     private emailService: EmailService,
-    private router:Router
+    private router:Router,
+    private formBuilder: FormBuilder,
   ){ }
 
   ngOnInit(): void {
-    const token = this.route.snapshot.queryParamMap.get('token');
+    this.token = this.route.snapshot.queryParamMap.get('token');
 
-    if(token){
-      this.userService.activateAccount(token).subscribe({
+    if(this.token){
+      this.userService.activateAccount(this.token).subscribe({
         next: (response) => {
           this.title = response.title;
           this.message = response.message;
@@ -42,6 +49,10 @@ export class AccountActivationComponent {
         }
       });
     }
+
+    this.resendActivationLinkForm = this.formBuilder.group({
+      emailAddress: new FormControl('', [Validators.required, Validators.email])
+    }) 
     
   }
 
@@ -69,7 +80,31 @@ export class AccountActivationComponent {
     this.router.navigate(['login'])
   }
 
-  resendActivationLink(){
-    console.log("work in progress")
+  resendActivationLink(){  
+    const email = this.resendActivationLinkForm.get('emailAddress')?.value
+
+    if (email == '') {
+      this.errormessage = 'Email address is required'; 
+      return;
+  }
+    if (this.token){
+      this.errormessage = ''
+      this.emailService.resendActivationLink(email, this.token).subscribe({
+        next: (response) => {
+          this.appAlert.showAlert(
+            'Activation Link Sent Successfully ✅',
+            response.message,
+            'success'
+          )
+        }, error: (error) => {
+          console.log(error)
+          this.appAlert.showAlert(
+            'Failed ❌',
+            error.error.message,
+            'error'
+          )
+        }
+      })
+    }
   }
 }

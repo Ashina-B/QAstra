@@ -5,10 +5,6 @@ const frontendURL = process.env.FRONTEND_URL
 const { poolPromise } = require('../config/db');
 const { generateToken } = require('../middleware/auth')
 
-let testAccount;
-(async () => {
-  testAccount = await nodemailer.createTestAccount();
-})();
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -29,7 +25,14 @@ exports.sendRegistrationEmail = async (req, res, next) => {
       return res.status(400).json({ error: "Email and activation token are required" });
     }
 
-   
+    const pool = await poolPromise
+
+    const is_active = await pool.request()
+    .input('email', recipient)
+    .query('SELECT * FROM users WHERE email = @email AND is_active = 1');
+    if (is_active.recordset.length > 0){
+      return res.json({ message: "Account is already Active" })
+    }  
 
     // const transporter = nodemailer.createTransport({
     //   host: "smtp.ethereal.email",
@@ -74,26 +77,34 @@ exports.resendActivationEmail = async (req, res, next) => {
     const { recipient } = req.body;
 
     if (!recipient) {
-      return res.status(400).json({ error: "Email is required" });
+      return res.status(400).json({ message: "Email is required" });
     }
 
-    const token = generateToken(recipient);
+    const new_token = generateToken(recipient);
 
     const pool = await poolPromise;
+    const exists = await pool.request()
+      .input('email', recipient)
+      .query('SELECT * FROM users WHERE email = @email');
+    if (exists.recordset.length == 0){
+      return res.status(400).json({ message: "Account does not exist, please register." })
+    }
+
     const is_active = await pool.request()
       .input('email', recipient)
       .query('SELECT * FROM users WHERE email = @email AND is_active = 1');
     if (is_active.recordset.length > 0){
-      return res.json({ message: "Account is already Active" })
+      return res.status(400).json({ message: "Account is already Active" })
     }
-    // await pool.request()
-    //   .input('email', recipient)
-    //   .input('token', token)
-    //   .query('UPDATE users SET activation_token = @token, is_active = 0 WHERE email = @email');
+
+    await pool.request()
+    .input('email', recipient)
+    .input('new_token', new_token)
+    .query('UPDATE Users SET activation_token=@new_token where email=@email')
 
     const templatePath = path.join(__dirname, '../Email Templates/resendActivationEmail.html')
     let emailTemplate = fs.readFileSync(templatePath, 'utf-8')
-    const activationLink = `${frontendURL}/activate-account?token=${token}`;
+    const activationLink = `${frontendURL}/activate-account?token=${new_token}`;
     emailTemplate = emailTemplate.replace('{{activationLink}}', activationLink)
 
     const mailOptions = {
@@ -105,10 +116,14 @@ exports.resendActivationEmail = async (req, res, next) => {
 
     const info = await transporter.sendMail(mailOptions);
 
-    res.json({
+    
+
+    res.status(200).json({
       messageId: info.messageId,
-      message: "Activation email sent successfully",
+      message: "The token has been updated, and the activation email has been sent successfully.",
     });
+
+    
 
 
   }catch(error){

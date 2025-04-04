@@ -14,23 +14,23 @@
             <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                 <div class="form-group mb-3">
                   <div class="error-message" *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
-                    <span>A valid username is required</span>
+                    <span id="username-error-message">A valid username is required</span>
                   </div>
-                  <label class="form-label" for="username">Username*</label>
+                  <label class="form-label" for="username">Username <span class="required">*</span></label>
                   <input type="text" class="form-control" formControlName = "username" id="username" placeholder="Jane Doe" />
                 </div>
                 <div class="form-group mb-3">
                   <div class="error-message" *ngIf="registrationForm.get('emailAddress')?.invalid && registrationForm.get('emailAddress')?.touched">
-                    <span>A valid email Address is required</span>
+                    <span id="emailAddress-error-message">A valid email address is required</span>
                   </div>
-                  <label class="form-label" for="emailAddress">Email Address*</label>
+                  <label class="form-label" for="emailAddress">Email Address <span class="required">*</span></label>
                   <input type="email" class="form-control" formControlName = "emailAddress" id="emailAddress" placeholder="Email Address" />
                 </div>
                 <div class="form-group mb-3">
                   <div class="error-message" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
-                    <span>A valid password is required</span>
+                    <span id="password-error-message">A valid password is required</span>
                   </div>
-                  <label class="form-label" for="password">Password*</label>
+                  <label class="form-label" for="password">Password <span class="required">*</span></label>
                   <input type="password" class="form-control" formControlName = "password" id="password" placeholder="Password" />
                 </div>
                 <!-- <p class="mt-4 text-sm text-muted">
@@ -40,7 +40,7 @@
                   <a href="javascript:" class="text-primary">Privacy Policy</a>
                 </p> -->
                 <div class="d-grid mt-3">
-                  <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || registrationForm.invalid">Create Account</button>
+                  <button type="submit" class="btn btn-primary" id="submit-button" [disabled]="isSubmitting || registrationForm.invalid">Create Account</button>
                 </div>
                 <div class="error-message" *ngIf="errorMessage">
                   <span>{{errorMessage}}</span>

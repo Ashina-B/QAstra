@@ -11,7 +11,7 @@
         }
         @if (showContent) {
           <div class="card-body" [ngClass]="blockClass" [style.padding.px]="padding">
-            <span class="block sm:inline">{{ message }}</span>
+            <span class="block sm:inline" id="message">{{ message }}</span>
             <ng-content></ng-content>
           </div>
           <div>
