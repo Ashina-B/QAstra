@@ -29,7 +29,6 @@ export class RegistrationComponent {
   ){}
 
   ngOnInit(): void {
-    console.log(this.isSubmitting)
     this.registrationForm = this.formBuilder.group({
       username: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       emailAddress: new FormControl('', [Validators.required, Validators.email]),

@@ -38,4 +38,12 @@ export class UsersService {
         return of([])
       }
     }
+
+    loginUser(userCreds:any): Observable<any> {
+      if (isPlatformBrowser(this.platformId)){
+        return this.http.post(`${this.apiUrl}/loginUser`, userCreds)
+      }else{
+        return of([])
+      }
+    }
 }

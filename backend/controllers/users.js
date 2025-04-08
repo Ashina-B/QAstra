@@ -122,6 +122,51 @@ exports.activateAccount = async(req, res) => {
     }
 }
 
+exports.loginUser = async(req, res) => {
+    const {email, password } = req.body;
+
+    if (!password || !email ){
+        return res.status(400).json({message: "Email address and password are required"});
+    }
+
+    const pool = await poolPromise;
+
+    const result = await pool.request()
+    .input('email', email)
+    .query('SELECT * FROM Users WHERE email = @email');
+
+    const user = result.recordset[0]
+
+
+    if (!user){
+        return res.status(400).json({message: "Invalid email or password"})
+    }
+
+    if (user.is_active == false){
+        return res.status(400).json({message: "User is not active, please check your email and activate your account first"})
+    }
+
+    console.log(user.is_active)
+
+    const is_match = await bcrypt.compare(password, user.password_hash);
+
+    console.log('is match',is_match)
+
+    if (!is_match){
+        return res.status(400).json({message: "Invalid email or password"})
+    }
+
+    const token = generateToken(email)
+
+    res.cookie('token', 'Bearer'+token)
+
+    return res.status(200).json({
+        message: "User logged in successfully.",
+        Token: token
+    })
+
+}
+
 exports.removeUser = async(req, res) => {
     const { email } = req.body;
 
