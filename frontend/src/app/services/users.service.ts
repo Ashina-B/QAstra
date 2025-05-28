@@ -46,4 +46,20 @@ export class UsersService {
         return of([])
       }
     }
+
+    forgotPassword(email:string): Observable<any> {
+      if (isPlatformBrowser(this.platformId)){
+        return this.http.post(`${this.apiUrl}/forgotPassword`, { email })
+      }else{
+        return of([])
+      }
+    }
+
+    resetPassword(token:string, newPassword:string): Observable<any> {
+      if (isPlatformBrowser(this.platformId)){
+        return this.http.post(`${this.apiUrl}/resetPassword`, { token, newPassword })
+      }else{
+        return of([])
+      }
+    }
 }

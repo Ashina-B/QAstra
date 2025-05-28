@@ -31,7 +31,7 @@
                   <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
                   <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
                 </div>
-                  <a href="javascript:">Forgot Password?</a>
+                  <a href="javascript:void(0)" (click)="forgotpasswordModal = true">Forgot Password?</a>
               </div>
               <div class="d-grid mt-4">
                 <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || loginForm.invalid">Login</button>
@@ -45,6 +45,30 @@
         <div class="auth-footer row">
           <div class="col-auto my-1">
           </div>
+        </div>
+      </div>
+      <div class="forgotPasswordModal" *ngIf="forgotpasswordModal">
+        <div class="auth-form">
+          <div class="card my-5">
+            <div class="card-body">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+              <h3 class="mb-0"><b>Forgot Password</b></h3>
+              <a href="javascript:void(0)" (click)="forgotpasswordModal = false">X</a>
+            </div>
+            <form [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassword()">
+            <div class="form-group mb-3">
+                <div class="error-message" *ngIf="forgotPasswordForm.get('email')?.invalid && forgotPasswordForm.get('email')?.touched">
+                  <span id="email-error-message">A valid email address is required</span>
+                </div>
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email Address"/>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || forgotPasswordForm.invalid">Send Reset Email</button>
+              </div>
+          </form> 
+          </div>
+          </div>            
         </div>
       </div>
     </div>

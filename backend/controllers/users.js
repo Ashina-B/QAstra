@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { generateToken } = require('../middleware/auth')
 const jwt= require('jsonwebtoken')
 const JWT_SECRET = process.env.JWT_SECRET
+const emailContoller = require('./emails')
 
 
 exports.getUsers = async (req, res) => {
@@ -146,11 +147,7 @@ exports.loginUser = async(req, res) => {
         return res.status(400).json({message: "User is not active, please check your email and activate your account first"})
     }
 
-    console.log(user.is_active)
-
     const is_match = await bcrypt.compare(password, user.password_hash);
-
-    console.log('is match',is_match)
 
     if (!is_match){
         return res.status(400).json({message: "Invalid email or password"})
@@ -199,3 +196,72 @@ exports.removeUser = async(req, res) => {
     }
 
 }
+
+exports.forgotPassword = async(req, res) => {
+    const { email } = req.body;
+    const token = generateToken(email)
+    const expiry = new Date(Date.now() + 60 * 60 * 1000);
+
+    try {
+        const pool = await poolPromise;
+
+        const exists = await pool.request()
+            .input('email', email)
+            .query('SELECT * FROM users WHERE email = @email');
+
+        if (exists.recordset.length === 0) {
+            return res.status(400).json({ message: "User does not exist" });
+        }   
+
+        await pool.request()
+            .input('token', token)
+            .input('email', email)
+            .input('expiry', expiry)
+            .query('UPDATE users SET reset_token = @token, reset_token_expiry = @expiry WHERE email = @email')
+    
+        await emailContoller.sendResetEmail(email, token);
+
+        res.json({ message: 'Reset email sent successfully.', token: token});
+
+      } catch (err) {
+        console.log(err)
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+}
+
+exports.resetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+    const date = new Date();
+
+    try {
+        const pool = await poolPromise;
+
+        const exists = await pool.request()
+            .input('token', token)
+            .input('date', date)
+            .query('SELECT * FROM users WHERE reset_token = @token AND reset_token_expiry > @date');
+
+        if (exists.recordset.length === 0) {
+            return res.status(400).json({ message: "Invalid or expired token" });
+        }   
+
+        const password_hash = await bcrypt.hash(newPassword, 10)
+
+        // const is_match = await bcrypt.compare(newPassword, password_hash);
+
+        // if (is_match){
+        //     return res.status(400).json({message: "Password change failed: the new password cannot be the same as the old password."})
+        // }
+
+        await pool.request()
+            .input('password_hash', password_hash)
+            .input('token', token)
+            .query('UPDATE Users SET password_hash = @password_hash, reset_token = NULL, reset_token_expiry = NULL WHERE reset_token = @token')
+
+        res.json({ message: 'Password was reset successful, please log in' });
+  } 
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not reset password'+err.error.message });
+  }
+};

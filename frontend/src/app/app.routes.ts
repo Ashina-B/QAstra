@@ -3,10 +3,12 @@ import { RegistrationComponent } from './users/registration/registration.compone
 import { LoginComponent } from './users/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AccountActivationComponent } from './users/account-activation/account-activation.component';
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'register', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'activate-account', component:AccountActivationComponent}
+    {path: 'activate-account', component:AccountActivationComponent},
+    {path: 'reset-password', component:ResetPasswordComponent}
 ];

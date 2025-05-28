@@ -19,8 +19,6 @@ exports.sendRegistrationEmail = async (req, res, next) => {
   try {
     const { recipient, token } = req.body;
 
-    console.log("Request Body:",recipient, token)
-
     if (!recipient || !token) {
       return res.status(400).json({ error: "Email and activation token are required" });
     }
@@ -60,7 +58,7 @@ exports.sendRegistrationEmail = async (req, res, next) => {
 
     res.json({
       messageId: info.messageId,
-      message: "Activation email sent successfully",
+      message: "A verification email has been sent to your inbox. Please check your email and follow the instructions to verify your account.",
     });
   } catch (error) {
     console.error('Error sending activation email:', error);
@@ -116,16 +114,10 @@ exports.resendActivationEmail = async (req, res, next) => {
 
     const info = await transporter.sendMail(mailOptions);
 
-    
-
     res.status(200).json({
       messageId: info.messageId,
       message: "The token has been updated, and the activation email has been sent successfully.",
     });
-
-    
-
-
   }catch(error){
     console.error('Error sending activation email:', error);
     res.status(500).json({ 
@@ -137,6 +129,22 @@ exports.resendActivationEmail = async (req, res, next) => {
 
 }
 
+exports.sendResetEmail = async (email, token) => {
+  const templatePath = path.join(__dirname, '../Email Templates/resetPassword.html')
+  let emailTemplate = fs.readFileSync(templatePath, 'utf-8')
+  const activationLink = `${frontendURL}/reset-password?token=${token}`;
+  emailTemplate = emailTemplate.replace('{{activationLink}}', activationLink)
 
+
+  const mailOptions = {
+    from: '"QAstra" <ashinabarasa91@gmail.com>',
+    to: email,
+    subject: 'Reset your password',
+    html: emailTemplate,
+  };
+
+  await transporter.sendMail(mailOptions);
+
+};
 // felixkpt@gmail.com
 

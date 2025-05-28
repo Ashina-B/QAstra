@@ -65,15 +65,25 @@ export class RegistrationComponent {
             return;
         }
         const token = response.token;  
-        this.emailService.sendRegistrationEmail(this.user.email, token)
-        this.appAlert.showAlert(
-          'Registration Successful ✅', 
-          'A verification email has been sent to your inbox. Please check your email and follow the instructions to verify your account.', 
-          'success' )
+        this.emailService.sendRegistrationEmail(this.user.email, token).subscribe({
+          next: (response) => {
+            this.appAlert.showAlert(
+              'Registration Successful ✅', 
+              response.message, 
+              'success' )
+          },
+          error: (error) => {
+            this.isSubmitting = false;
+            this.appAlert.showAlert(
+              'Registration Failed ❌', 
+              this.errorMessage = error?.error?.message,
+              'error' )
+          }
+        })
+        // 'A verification email has been sent to your inbox. Please check your email and follow the instructions to verify your account.'
         },
         error: (error) => {
           this.isSubmitting = false;
-          console.error('Error:', error);
           this.errorMessage = error?.error?.message;
           this.appAlert.showAlert(
             'Registration Failed ❌', 

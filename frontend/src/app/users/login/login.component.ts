@@ -15,7 +15,9 @@ import { finalize } from 'rxjs';
 })
 export class LoginComponent {
   loginForm!:FormGroup;
+  forgotPasswordForm!:FormGroup;
   isSubmitting = false;
+  forgotpasswordModal = false;
   errorMessage!:string
   userCreds:any;
   @ViewChild(AlertComponent) appAlert!: AlertComponent;
@@ -30,6 +32,9 @@ export class LoginComponent {
       this.loginForm = this.formBuilder.group({
         emailAddress: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required, this.passwordValidator])
+      })
+      this.forgotPasswordForm = this.formBuilder.group({
+        email: new FormControl('', [Validators.required, Validators.email])
       })
     }
   
@@ -46,6 +51,30 @@ export class LoginComponent {
       return null;
     }
 
+    forgotPassword(){
+      if(this.forgotPasswordForm.valid){
+        this.isSubmitting = true;
+        let email = this.forgotPasswordForm.get('email')?.value
+        this.usersService.forgotPassword(email).subscribe({
+        next: (response) => {
+          this.appAlert.showAlert(
+              'Reset Email Sent ✅', 
+              response.message, 
+              'success' );
+          this.forgotpasswordModal = false
+        },
+        error: (error) => {
+          this.isSubmitting = false
+          this.appAlert.showAlert(
+              "Reset Email Failed ❌",
+              error?.error?.message,
+              "error"
+            )
+        }
+      })
+      }
+    }
+
     onSubmit(){
       this.errorMessage = '';
       this.isSubmitting = true
@@ -59,9 +88,7 @@ export class LoginComponent {
 
         this.usersService.loginUser(this.userCreds).subscribe({
           next: () => {
-
-          this.router.navigate([''])
-
+            this.router.navigate([''])
           },
           error: (error) => {
             this.isSubmitting = false;
