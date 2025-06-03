@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { IconService } from '@ant-design/icons-angular';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -14,14 +14,13 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './nav-right.component.css'
 })
 export class NavRightComponent {
-  private iconService = inject(IconService);
 
   styleSelectorToggle = input<boolean>();
   Customize = output();
   windowWidth: number;
   screenFull: boolean = true;
 
-  constructor() {
+  constructor(private iconService: IconService) {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
       ...[

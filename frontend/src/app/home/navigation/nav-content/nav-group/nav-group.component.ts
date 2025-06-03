@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NavigationItem } from '../../navigation';
 import { Location } from '@angular/common';
 import { NavCollapseComponent } from '../nav-collapse/nav-collapse.component';
@@ -11,17 +11,12 @@ import { NavItemComponent } from '../nav-item/nav-item.component';
   templateUrl: './nav-group.component.html',
   styleUrl: './nav-group.component.css'
 })
-export class NavGroupComponent implements OnInit{
-  private location = inject(Location);
+export class NavGroupComponent implements OnInit {
+  constructor(private location: Location) {}
 
-  // public props
+  @Input({ required: true }) item!: NavigationItem;
 
-  // All Version in Group Name
-  item = input.required<NavigationItem>();
-
-  // Life cycle events
   ngOnInit() {
-    // at reload time active and trigger link
     let current_url = this.location.path();
     // eslint-disable-next-line
     // @ts-ignore

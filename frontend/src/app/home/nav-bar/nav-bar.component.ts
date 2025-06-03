@@ -1,31 +1,29 @@
-import { Component, output } from '@angular/core';
+import { Component, Output, EventEmitter, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NavLeftComponent } from './nav-left/nav-left.component';
 import { NavRightComponent } from './nav-right/nav-right.component';
-import { NavCollapseComponent } from '../navigation/nav-content/nav-collapse/nav-collapse.component';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
   imports: [NavLeftComponent, NavRightComponent],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css'
+  styleUrls: ['./nav-bar.component.css'] // Corrected typo: styleUrl -> styleUrls
 })
 export class NavBarComponent {
-  // public props
-  NavCollapse = output();
-  NavCollapsedMob = output();
+  @Output() NavCollapse = new EventEmitter<void>();
+  @Output() NavCollapsedMob = new EventEmitter<void>();
 
-  navCollapsed: boolean = false ;
-  windowWidth: number;
-  navCollapsedMob: boolean;
+  navCollapsed: boolean = false;
+  navCollapsedMob: boolean = false;
+  windowWidth: number = 1024; // Default to avoid SSR errors
 
-  // Constructor
-  constructor() {
-    this.windowWidth = window.innerWidth;
-    this.navCollapsedMob = false;
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.windowWidth = window.innerWidth;
+    }
   }
 
-  // public method
   navCollapse() {
     if (this.windowWidth >= 1025) {
       this.navCollapsed = !this.navCollapsed;

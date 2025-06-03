@@ -1,27 +1,27 @@
-import { Component, output } from '@angular/core';
+import { Component, Inject, Output, EventEmitter, PLATFORM_ID } from '@angular/core';
 import { NavContentComponent } from './nav-content/nav-content.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
   imports: [ NavContentComponent ],
   templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.css'
+  styleUrls: ['./navigation.component.css'] // typo fix: `styleUrls` not `styleUrl`
 })
 export class NavigationComponent {
-  // media 1025 After Use Menu Open
-  NavCollapsedMob = output();
+  @Output() NavCollapsedMob = new EventEmitter<void>();
 
-  navCollapsedMob;
-  windowWidth: number;
+  navCollapsedMob = false;
+  windowWidth: number = 1024; // default fallback
 
-  // Constructor
-  constructor() {
-    this.windowWidth = window.innerWidth;
-    this.navCollapsedMob = false;
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      console.log(window.location.href);
+      this.windowWidth = window.innerWidth;
+    }
   }
 
-  // public method
   navCollapseMob() {
     if (this.windowWidth < 1025) {
       this.NavCollapsedMob.emit();
