@@ -8,7 +8,7 @@ import { NavRightComponent } from './nav-right/nav-right.component';
   standalone: true,
   imports: [NavLeftComponent, NavRightComponent],
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css'] // Corrected typo: styleUrl -> styleUrls
+  styleUrls: ['./nav-bar.component.css'] 
 })
 export class NavBarComponent {
   @Output() NavCollapse = new EventEmitter<void>();

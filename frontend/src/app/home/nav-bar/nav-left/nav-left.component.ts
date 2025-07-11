@@ -1,30 +1,45 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import {
+  Component,
+  Inject,
+  PLATFORM_ID,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { IconService } from '@ant-design/icons-angular';
-import { MenuUnfoldOutline, MenuFoldOutline, SearchOutline } from '@ant-design/icons-angular/icons';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import {
+  MenuUnfoldOutline,
+  MenuFoldOutline,
+  SearchOutline
+} from '@ant-design/icons-angular/icons';
 
 @Component({
   selector: 'app-nav-left',
   standalone: true,
-  imports: [CommonModule, NzIconModule],
+  imports: [CommonModule],
   templateUrl: './nav-left.component.html',
-  styleUrl: './nav-left.component.css'
+  styleUrls: ['./nav-left.component.css']
 })
 export class NavLeftComponent {
-  // public props
-  navCollapsed = input.required<boolean>();
-  NavCollapse = output();
-  NavCollapsedMob = output();
-  windowWidth: number;
+  @Input() navCollapsed!: boolean;
+  @Output() NavCollapse = new EventEmitter<void>();
+  @Output() NavCollapsedMob = new EventEmitter<void>();
 
-  // Constructor
-  constructor(private iconService: IconService) {
-    this.windowWidth = window.innerWidth;
-    this.iconService.addIcon(...[MenuUnfoldOutline, MenuFoldOutline, SearchOutline]);
+  windowWidth = 1024; // Default fallback
+
+  constructor(
+    private iconService: IconService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.iconService.addIcon(MenuUnfoldOutline, MenuFoldOutline, SearchOutline);
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.windowWidth = window.innerWidth;
+    }
   }
 
-  // public method
   navCollapse() {
     this.NavCollapse.emit();
   }

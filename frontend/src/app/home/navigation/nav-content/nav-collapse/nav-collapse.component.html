@@ -2,7 +2,7 @@
   <a [routerLinkActive]="['active']" (click)="navCollapse($event)">
     @if (item.icon) {
       <span class="coded-micon">
-        <i antIcon nz-icon nzType="{{ item.icon }}" theme="outline"></i>
+        <mat-icon>{{ item.icon }}</mat-icon>
       </span>
     }
     <span class="coded-mtext">

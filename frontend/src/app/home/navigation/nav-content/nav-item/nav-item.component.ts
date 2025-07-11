@@ -2,13 +2,12 @@ import { Component, Input } from '@angular/core';
 import { NavigationItem } from '../../navigation';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Router } from 'express';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nav-item',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, NzIconModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, MatIcon],
   templateUrl: './nav-item.component.html',
   styleUrl: './nav-item.component.css'
 })

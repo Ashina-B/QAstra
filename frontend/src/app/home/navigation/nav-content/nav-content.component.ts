@@ -1,6 +1,13 @@
-import { LocationStrategy, Location } from '@angular/common';
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { NavigationItem, NavigationItems } from '../navigation'; 
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  Inject,
+  PLATFORM_ID
+} from '@angular/core';
+import { isPlatformBrowser, LocationStrategy, Location } from '@angular/common';
+import { NavigationItem, NavigationItems } from '../navigation';
 import { IconService } from '@ant-design/icons-angular';
 import {
   DashboardOutline,
@@ -15,49 +22,49 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { NavGroupComponent } from './nav-group/nav-group.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-nav-content',
   standalone: true,
-  imports: [NgScrollbar, NavGroupComponent, NzIconModule],
+  imports: [NgScrollbar, NavGroupComponent],
   templateUrl: './nav-content.component.html',
   styleUrls: ['./nav-content.component.css']
 })
-export class NavContentComponent implements OnInit{
-
+export class NavContentComponent implements OnInit {
   @Output() NavCollapsedMob = new EventEmitter<void>();
-
   navigations: NavigationItem[] = NavigationItems;
-
-  // version
   title = 'Demo application for version numbering';
 
-  windowWidth = window.innerWidth;
+  windowWidth = 1024; // default fallback
 
   constructor(
     private iconService: IconService,
     private location: Location,
-    private locationStrategy: LocationStrategy
+    private locationStrategy: LocationStrategy,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.iconService.addIcon(
-      ...[
-        DashboardOutline,
-        CreditCardOutline,
-        FontSizeOutline,
-        LoginOutline,
-        ProfileOutline,
-        BgColorsOutline,
-        AntDesignOutline,
-        ChromeOutline,
-        QuestionOutline
-      ]
+      DashboardOutline,
+      CreditCardOutline,
+      FontSizeOutline,
+      LoginOutline,
+      ProfileOutline,
+      BgColorsOutline,
+      AntDesignOutline,
+      ChromeOutline,
+      QuestionOutline
     );
+
+    // Safely access window only in browser
+    if (isPlatformBrowser(this.platformId)) {
+      this.windowWidth = window.innerWidth;
+    }
   }
 
   ngOnInit() {
-    if (this.windowWidth < 1025) {
-      (document.querySelector('.coded-navbar') as HTMLDivElement).classList.add('menupos-static');
+    if (isPlatformBrowser(this.platformId) && this.windowWidth < 1025) {
+      const navbar = document.querySelector('.coded-navbar') as HTMLDivElement;
+      navbar?.classList.add('menupos-static');
     }
   }
 
@@ -67,7 +74,7 @@ export class NavContentComponent implements OnInit{
     if (baseHref) {
       current_url = baseHref + this.location.path();
     }
-    const link = "a.nav-link[ href='" + current_url + "' ]";
+    const link = `a.nav-link[href='${current_url}']`;
     const ele = document.querySelector(link);
     if (ele) {
       const parent = ele.parentElement;
@@ -84,10 +91,11 @@ export class NavContentComponent implements OnInit{
   }
 
   navMob() {
-    const nav = document.querySelector('app-navigation.coded-navbar');
-    if (this.windowWidth < 1025 && nav?.classList.contains('mob-open')) {
-      this.NavCollapsedMob.emit();
+    if (isPlatformBrowser(this.platformId)) {
+      const nav = document.querySelector('app-navigation.coded-navbar');
+      if (this.windowWidth < 1025 && nav?.classList.contains('mob-open')) {
+        this.NavCollapsedMob.emit();
+      }
     }
   }
-
 }

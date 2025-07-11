@@ -1,0 +1,7 @@
+.container{
+    display: flex;
+    max-width: 97vw;
+    max-height: 97vh;
+    margin-right: calc(var(--bs-gutter-x) * .5);
+    margin-left: calc(var(--bs-gutter-x) * .5);
+}

@@ -4,12 +4,12 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavItemComponent } from '../nav-item/nav-item.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nav-collapse',
   standalone: true,
-  imports: [CommonModule, RouterModule, NavItemComponent, NzIconModule],
+  imports: [CommonModule, RouterModule, NavItemComponent, MatIcon],
   templateUrl: './nav-collapse.component.html',
   styleUrl: './nav-collapse.component.css',
   animations: [

@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationItem } from '../../navigation';
-import { Location } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import { NavCollapseComponent } from '../nav-collapse/nav-collapse.component';
 import { NavItemComponent } from '../nav-item/nav-item.component';
 
@@ -12,11 +12,16 @@ import { NavItemComponent } from '../nav-item/nav-item.component';
   styleUrl: './nav-group.component.css'
 })
 export class NavGroupComponent implements OnInit {
-  constructor(private location: Location) {}
+  constructor(private location: Location,@Inject(PLATFORM_ID) private platformId: Object) {}
 
   @Input({ required: true }) item!: NavigationItem;
 
   ngOnInit() {
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return; // Don't run DOM code on the server
+    }
+    
     let current_url = this.location.path();
     // eslint-disable-next-line
     // @ts-ignore

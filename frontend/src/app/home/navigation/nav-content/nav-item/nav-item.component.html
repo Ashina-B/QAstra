@@ -3,7 +3,7 @@
     <a [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]" (click)="closeOtherMenu($event)">
       @if (item.icon) {
         <span class="coded-micon">
-          <i antIcon nz-icon nzType="{{ item.icon }}" theme="outline"></i>
+          <i [ngClass]="item.icon"></i>
         </span>
       }
       @if (item.icon) {
@@ -19,7 +19,7 @@
     <a [target]="item.target ? '_blank' : '_self'" [href]="item.url">
       @if (item.icon) {
         <span class="coded-micon">
-          <i antIcon nz-icon nzType="{{ item.icon }}" theme="outline"></i>
+          <mat-icon>{{ item.icon }}</mat-icon>
         </span>
       }
       @if (item.icon) {

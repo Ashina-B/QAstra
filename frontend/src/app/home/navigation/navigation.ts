@@ -31,7 +31,7 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/dashboard/default',
-        icon: 'dashboard',
+        icon: 'fa fa-dashboard',
         breadcrumbs: false
       }
     ]
@@ -48,8 +48,8 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/login',
-        icon: 'login',
-        target: true,
+        icon: 'fa fa-sign-in',
+        // target: true,
         breadcrumbs: false
       },
       {
@@ -58,50 +58,51 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/register',
-        icon: 'profile',
-        target: true,
+        icon: 'fas fa-clipboard',
+        // target: true,
         breadcrumbs: false
       }
     ]
   },
   {
-    id: 'utilities',
-    title: 'UI Components',
+    id: 'Projects',
+    title: 'Projects',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
-        id: 'typography',
-        title: 'Typography',
+        id: 'Test Project 1',
+        title: 'Test Project 1',
         type: 'item',
         classes: 'nav-item',
-        url: '/typography',
+        url: '/',
         icon: 'font-size'
       },
       {
-        id: 'color',
-        title: 'Colors',
+        id: 'Test Project 2',
+        title: 'Test Project 2',
         type: 'item',
         classes: 'nav-item',
-        url: '/color',
+        url: '/',
         icon: 'bg-colors'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
       }
+      // ,
+      // {
+      //   id: 'tabler',
+      //   title: 'Tabler',
+      //   type: 'item',
+      //   classes: 'nav-item',
+      //   url: 'https://ant.design/components/icon',
+      //   icon: 'ant-design',
+      //   target: true,
+      //   external: true
+      // }
     ]
   },
 
   {
-    id: 'other',
-    title: 'Other',
+    id: 'user',
+    title: 'Users Management',
     type: 'group',
     icon: 'icon-navigation',
     children: [

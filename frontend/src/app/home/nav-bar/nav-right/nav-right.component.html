@@ -1,12 +1,12 @@
 <ul class="list-unstyled">
   <li class="pc-h-item">
     <a href="https://github.com/codedthemes/mantis-free-angular-admin-template" target="_blank" class="pc-head-link me-0 bg-gray-200">
-      <i antIcon type="github" theme="outline"></i>
+      <i class="fab fa-github"></i>
     </a>
   </li>
   <li class="dropdown pc-h-item" ngbDropdown>
     <a class="pc-head-link dropdown-toggle arrow-none me-0 bg-gray-200" data-bs-toggle="dropdown" ngbDropdownToggle>
-      <i antIcon type="bell" theme="outline"></i>
+      <i class="fas fa-bell"> </i>
       <span class="badge bg-primary pc-h-badge">3</span>
     </a>
     <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
@@ -107,8 +107,8 @@
           <a href="javascript:" class="bg-transparent"><i class="d-flex f-20" antIcon theme="outline" type="logout"></i></a>
         </div>
       </div>
-      <ul ngbNav #nav="ngbNav" class="nav drp-tabs nav-fill nav-tabs">
-        <li ngbNavItem="1">
+      <mat-tab-group>
+        <mat-tab ngbNavItem="1">
           <a ngbNavLink>
             <i antIcon theme="outline" type="user" class="me-2"></i>
             Profile
@@ -117,7 +117,7 @@
             @for (task of profile; track task) {
               <div>
                 <a class="dropdown-item">
-                  <i class="text-muted" antIcon theme="outline" nz-icon nzType="{{ task.icon }}"></i>
+                  <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
                   <span>{{ task.title }}</span>
                 </a>
               </div>
@@ -129,8 +129,8 @@
               </a>
             </div>
           </ng-template>
-        </li>
-        <li ngbNavItem="2">
+        </mat-tab>
+        <mat-tab ngbNavItem="2">
           <a ngbNavLink>
             <i class="me-2" antIcon theme="outline" type="setting"></i>
             Setting
@@ -139,15 +139,15 @@
             @for (task of setting; track task) {
               <div>
                 <a class="dropdown-item">
-                  <i class="text-muted" antIcon theme="outline" nz-icon nzType="{{ task.icon }}"></i>
+                  <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
                   <span>{{ task.title }}</span>
                 </a>
               </div>
             }
           </ng-template>
-        </li>
-      </ul>
-      <div [ngbNavOutlet]="nav"></div>
+        </mat-tab>
+      </mat-tab-group>
+      <!-- <div [ngbNavOutlet]="nav"></div> -->
     </div>
   </li>
 </ul>
