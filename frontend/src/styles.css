@@ -290,6 +290,14 @@ a {
     background: #fafafb;
 }
 
+.pc-container {
+    position: relative;
+    top: 60px;
+    margin-left: 260px;
+    min-height: calc(100vh - 113px);
+    background: #fafafb;
+}
+
 
 
 
