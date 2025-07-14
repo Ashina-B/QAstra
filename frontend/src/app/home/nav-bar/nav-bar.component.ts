@@ -18,7 +18,7 @@ export class NavBarComponent {
   navCollapsedMob: boolean = false;
   windowWidth: number = 1024; // Default to avoid SSR errors
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
       this.windowWidth = window.innerWidth;
     }

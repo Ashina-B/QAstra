@@ -11,7 +11,7 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'QAstra';
-  users:any[] = []
+  users:unknown[] = []
 
   constructor(private router: Router){
   }

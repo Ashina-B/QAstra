@@ -75,7 +75,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Test Project 1',
         type: 'item',
         classes: 'nav-item',
-        url: '/',
+        url: '/project',
         icon: 'font-size'
       },
       {
@@ -83,7 +83,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Test Project 2',
         type: 'item',
         classes: 'nav-item',
-        url: '/',
+        url: '/project',
         icon: 'bg-colors'
       }
       // ,

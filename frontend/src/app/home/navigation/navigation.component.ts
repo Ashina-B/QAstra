@@ -15,7 +15,7 @@ export class NavigationComponent {
   navCollapsedMob = false;
   windowWidth: number = 1024; // default fallback
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
       console.log(window.location.href);
       this.windowWidth = window.innerWidth;

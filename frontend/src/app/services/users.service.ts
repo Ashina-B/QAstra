@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsersService {
 
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: object) { }
 
   private apiUrl = 'http://localhost:5000/api/users';
   
-    getUsers(): Observable<any> {
+    getUsers(): Observable<unknown> {
     if (isPlatformBrowser(this.platformId)){
       return this.http.get(`${this.apiUrl}/getUsers`);
     }else{
@@ -21,7 +21,7 @@ export class UsersService {
       
     }
 
-    registerUser(requestData:any): Observable<any> {
+    registerUser(requestData:unknown): Observable<unknown> {
       if (isPlatformBrowser(this.platformId)){
         return this.http.post(`${this.apiUrl}/registerUser`, requestData)
       }else{
@@ -29,7 +29,7 @@ export class UsersService {
       }
     }
 
-    activateAccount(token:string):Observable<any> {
+    activateAccount(token:string):Observable<unknown> {
       if (isPlatformBrowser(this.platformId)){
         return this.http.post(`${this.apiUrl}/activateAccount`, { token })
       }else{
