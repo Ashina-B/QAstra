@@ -1,59 +1,68 @@
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
+import js from '@eslint/js'
+import tseslint from '@typescript-eslint/eslint-plugin'
+import parser from '@typescript-eslint/parser'
+import tsconfigs from '@typescript-eslint/eslint-plugin/configs'
 
 export default [
   js.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tsconfigs.recommended,
 
-  // Base config
   {
     ignores: [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/.angular/**",
-      "**/vite/**",
-      "**/build/**",
-      "**/.output/**",
-      "**/coverage/**",
-      "**/*.config.*",
-      "**/env.d.ts",
-      "**/index.html"
-    ]
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/.angular/**',
+      '**/vite/**',
+      '**/build/**',
+      '**/.output/**',
+      '**/coverage/**',
+      '**/*.config.*',
+      '**/env.d.ts',
+      '**/index.html',
+    ],
   },
 
-  // Frontend config
   {
-    files: ["frontend/**/*.ts", "frontend/**/*.tsx"],
+    files: ['frontend/**/*.ts', 'frontend/**/*.tsx'],
     languageOptions: {
-      parser: tseslint.parser,
+      parser,
       parserOptions: {
-        project: "./frontend/tsconfig.json",
-        sourceType: "module"
-      }
+        project: './frontend/tsconfig.json',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off'
-    }
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
   },
 
-  // Backend config
   {
-  files: ['backend/**/*.js', 'backend/**/*.ts'],
-  languageOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    globals: {
-      process: 'readonly',
-      require: 'readonly',
-      module: 'readonly',
-      exports: 'readonly',
-      console: 'readonly',
-      __dirname: 'readonly',
-    }
+    files: ['backend/**/*.ts', 'backend/**/*.js'],
+    languageOptions: {
+      parser,
+      parserOptions: {
+        project: './backend/tsconfig.json',
+        sourceType: 'module',
+      },
+      ecmaVersion: 'latest',
+      globals: {
+        process: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        console: 'readonly',
+        __dirname: 'readonly',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      'no-undef': 'off',
+    },
   },
-  rules: {
-    '@typescript-eslint/no-require-imports': 'off',
-    'no-undef': 'off'
-  }
-}
-];
+]
