@@ -65,6 +65,237 @@ body {
     color: red;
 }
 
+.f-w-600 {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+a {
+    /* color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1)); */
+    color: black;   
+    text-decoration: none;
+    font-size: 15px;
+    /* font-style: normal; */
+    font-weight: 400;
+    font-family: "TikTok Sans", sans-serif;
+    color: rgb(20, 20, 20);
+    background-color: rgba(0, 0, 0, 0);
+    text-align: start;
+    text-indent: 0px;
+    line-height: 21px;
+    text-transform: none;
+    text-decoration: none solid rgb(20, 20, 20)
+}
+
+.pc-header ul {
+    margin-bottom: 0;
+    display: inline-flex;
+}
+
+.pc-h-item {
+    min-height: 60px;
+    align-items: center;
+    position: relative;
+    display: inline-flex;
+}
+
+.pc-head-link {
+    margin: 0 8px;
+    position: relative;
+    font-weight: 500;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 4px;
+    color: var(--pc-header-color);
+    overflow: hidden;
+}
+
+.pc-head-link:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--pc-active-background);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: all .08s cubic-bezier(.37,.24,.53,.99);
+}
+
+.header-user-profile .pc-head-link {
+    width: auto;
+    padding: 7px;
+}
+
+.header-user-profile .pc-head-link .user-avatar {
+    width: 34px;
+}
+
+.pc-head-link .pc-h-badge {
+    display: flex;
+    flex-flow: wrap;
+    place-content: center;
+    font-weight: 500;
+    font-size: .75rem;
+    line-height: 1;
+    transition: transform 225ms cubic-bezier(.4,0,.2,1) 0ms;
+    transform-origin: 100% 0%;
+    min-width: 16px;
+    height: 16px;
+    padding: 4px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    border-radius: 50%;
+    z-index: 9;
+}
+
+.pc-head-link img {
+    position: relative;
+    z-index: 5;
+    transition: all .08s cubic-bezier(.37,.24,.53,.99);
+}
+
+.user-avatar {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.pc-head-link span{
+    position: relative;
+    z-index: 5;
+    transition: all .08s cubic-bezier(.37,.24,.53,.99);
+    text-decoration: none;
+}
+
+.dropdown-toggle {
+    white-space: nowrap;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    display: inline-flex;
+}
+
+.header-wrapper {
+    display: flex;
+    padding: 0 25px 0 12px;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.header-search {
+  position: relative;
+  display: inline-block;
+}
+
+.header-search i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 15px;
+}
+
+.header-search input {
+  padding-left: 30px; /* leave space for icon */
+  height: 35px;
+  font-size: 14px;
+}
+
+.coded-mtext {
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.coded-inner-navbar{
+    display: flex;
+    flex-direction: column;
+}
+
+.coded-inner-navbar li a {
+    padding: 12px 16px 12px 28px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    position: relative;
+}
+
+.navbar-content {
+    padding: 16px 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.coded-menu-caption {
+    font-size: .9rem;
+    font-weight: 500;
+    padding: 12px 24px;
+    text-transform: capitalize;
+    position: relative;
+    color: #8c8c8c;
+}
+
+.coded-micon {
+    margin-right: 12px;
+}
+
+.pc-sidebar {
+    background: white;
+    position: absolute;
+    right: 0;
+    left: 0;
+    width: 260px;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1026;
+    display: block;
+    height: 94vh;
+    border-right: 1px solid rgb(240, 240, 240);
+}
+
+.pc-header {
+    background: white;
+    min-height: 60px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    position: fixed;
+    left: 260px;
+    right: 0;
+    z-index: 1025;
+    display: flex;
+}
+
+.pc-footer {
+    position: relative;
+    z-index: 995;
+    margin-left: 260px;
+    margin-top: 60px;
+    background: #fafafb;
+    padding: 12px 48px;
+}
+
+.pc-container {
+    position: relative;
+    top: 60px;
+    margin-left: 260px;
+    min-height: calc(100vh - 113px);
+    background: #fafafb;
+}
+
+.pc-container {
+    position: relative;
+    top: 60px;
+    margin-left: 260px;
+    min-height: calc(100vh - 113px);
+    background: #fafafb;
+}
 
 
 

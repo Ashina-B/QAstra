@@ -1,18 +1,59 @@
-// Use 'import' instead of 'require'
-import eslint from "eslint";
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
 
-export default {
-  extends: ["eslint:recommended"],
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+export default [
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+
+  // Base config
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.angular/**",
+      "**/vite/**",
+      "**/build/**",
+      "**/.output/**",
+      "**/coverage/**",
+      "**/*.config.*",
+      "**/env.d.ts",
+      "**/index.html"
+    ]
   },
-  env: {
-    node: true,
-    browser: true,
-    es2022: true,
+
+  // Frontend config
+  {
+    files: ["frontend/**/*.ts", "frontend/**/*.tsx"],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: "./frontend/tsconfig.json",
+        sourceType: "module"
+      }
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off'
+    }
+  },
+
+  // Backend config
+  {
+  files: ['backend/**/*.js', 'backend/**/*.ts'],
+  languageOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    globals: {
+      process: 'readonly',
+      require: 'readonly',
+      module: 'readonly',
+      exports: 'readonly',
+      console: 'readonly',
+      __dirname: 'readonly',
+    }
   },
   rules: {
-    // Your ESLint rules go here
-  },
-};
+    '@typescript-eslint/no-require-imports': 'off',
+    'no-undef': 'off'
+  }
+}
+];

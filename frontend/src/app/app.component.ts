@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { AlertComponent } from './shared_components/alert/alert.component';
 
 @Component({
   selector: 'app-root',

@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,11 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsersService {
 
-  constructor() { }
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: object) { }
 
   private apiUrl = 'http://localhost:5000/api/users';
-  private http = inject(HttpClient);
-  private platformId = inject(PLATFORM_ID);
   
     getUsers(): Observable<any> {
     if (isPlatformBrowser(this.platformId)){
