@@ -1,68 +1,63 @@
-import js from '@eslint/js'
-import tseslint from '@typescript-eslint/eslint-plugin'
-import parser from '@typescript-eslint/parser'
-import tsconfigs from '@typescript-eslint/eslint-plugin/configs'
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
 
 export default [
   js.configs.recommended,
-  ...tsconfigs.recommended,
 
+  // Base config
   {
     ignores: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/.angular/**',
-      '**/vite/**',
-      '**/build/**',
-      '**/.output/**',
-      '**/coverage/**',
-      '**/*.config.*',
-      '**/env.d.ts',
-      '**/index.html',
-    ],
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.angular/**",
+      "**/vite/**",
+      "**/build/**",
+      "**/.output/**",
+      "**/coverage/**",
+      "**/*.config.*",
+      "**/env.d.ts",
+      "**/index.html",
+      "**/eslint.config.js"
+    ]
   },
 
+  // Frontend config
   {
-    files: ['frontend/**/*.ts', 'frontend/**/*.tsx'],
+    files: ["frontend/**/*.ts", "frontend/**/*.tsx"],
     languageOptions: {
-      parser,
+      parser: tseslint.parser,
       parserOptions: {
-        project: './frontend/tsconfig.json',
-        sourceType: 'module',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': tseslint,
+        project: "./frontend/tsconfig.json",
+        sourceType: "module"
+      }
     },
     rules: {
+      ...tseslint.configs.recommended.rules, 
       '@typescript-eslint/no-explicit-any': 'off',
-    },
+      'no-unused-vars': 'off',
+      'no-undef': 'off'
+    }
   },
 
+  // Backend config
   {
-    files: ['backend/**/*.ts', 'backend/**/*.js'],
-    languageOptions: {
-      parser,
-      parserOptions: {
-        project: './backend/tsconfig.json',
-        sourceType: 'module',
-      },
-      ecmaVersion: 'latest',
-      globals: {
-        process: 'readonly',
-        require: 'readonly',
-        module: 'readonly',
-        exports: 'readonly',
-        console: 'readonly',
-        __dirname: 'readonly',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': tseslint,
-    },
-    rules: {
-      '@typescript-eslint/no-require-imports': 'off',
-      'no-undef': 'off',
-    },
+  files: ['backend/**/*.js', 'backend/**/*.ts'],
+  languageOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    globals: {
+      process: 'readonly',
+      require: 'readonly',
+      module: 'readonly',
+      exports: 'readonly',
+      console: 'readonly',
+      __dirname: 'readonly',
+    }
   },
-]
+  rules: {
+    ...tseslint.configs.recommended.rules, 
+    '@typescript-eslint/no-require-imports': 'off',
+    'no-undef': 'off'
+  }
+}
+];

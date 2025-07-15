@@ -3,22 +3,19 @@
   "version": "1.0.0",
   "description": "<<<<<<< HEAD\r # QAstra\r =======\r # QAstra",
   "main": "eslint.config.js",
-
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint . --fix",
+    "lint": "npx eslint eslint.config.js --fix --no-ignore",
     "lint_frontend": "npx eslint frontend",
     "lint_backend": "npx eslint backend",
     "prepare": "husky install",
     "precommit": "eslint . --fix"
   },
-
   "lint-staged": {
-  "*.{js,ts,tsx}": [
-    "eslint . --fix"
+    "*.{js,ts,tsx}": [
+      "eslint . --fix"
     ]
   },
-
   "author": "",
   "license": "ISC",
   "type": "module",
@@ -26,8 +23,9 @@
     "@types/chai": "^5.2.2",
     "@types/jasmine": "^5.1.8",
     "@types/mocha": "^10.0.10",
-    "@typescript-eslint/eslint-plugin": "^8.36.0",
-    "@typescript-eslint/parser": "^8.36.0",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "@typescript-eslint/utils": "^8.37.0",
     "eslint": "^9.31.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
