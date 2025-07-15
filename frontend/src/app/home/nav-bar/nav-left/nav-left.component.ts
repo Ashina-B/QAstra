@@ -31,7 +31,7 @@ export class NavLeftComponent {
 
   constructor(
     private iconService: IconService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.iconService.addIcon(MenuUnfoldOutline, MenuFoldOutline, SearchOutline);
 

@@ -60,7 +60,7 @@ export class NavRightComponent {
 
   constructor(
     private iconService: IconService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.windowWidth = window.innerWidth;

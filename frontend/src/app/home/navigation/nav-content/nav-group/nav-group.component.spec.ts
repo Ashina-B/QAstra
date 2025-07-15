@@ -18,6 +18,6 @@ describe('NavGroupComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).to.be.true;
+    expect(component).toBeTruthy();
   });
 });

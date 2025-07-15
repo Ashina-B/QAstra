@@ -41,7 +41,7 @@ export class NavContentComponent implements OnInit {
     private iconService: IconService,
     private location: Location,
     private locationStrategy: LocationStrategy,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.iconService.addIcon(
       DashboardOutline,
