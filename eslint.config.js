@@ -3,7 +3,6 @@ import tseslint from "typescript-eslint";
 
 export default [
   js.configs.recommended,
-  ...tseslint.configs.recommended,
 
   // Base config
   {
@@ -17,7 +16,8 @@ export default [
       "**/coverage/**",
       "**/*.config.*",
       "**/env.d.ts",
-      "**/index.html"
+      "**/index.html",
+      "**/eslint.config.js"
     ]
   },
 
@@ -32,7 +32,10 @@ export default [
       }
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off'
+      ...tseslint.configs.recommended.rules, 
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-unused-vars': 'off',
+      'no-undef': 'off'
     }
   },
 
@@ -52,6 +55,7 @@ export default [
     }
   },
   rules: {
+    ...tseslint.configs.recommended.rules, 
     '@typescript-eslint/no-require-imports': 'off',
     'no-undef': 'off'
   }

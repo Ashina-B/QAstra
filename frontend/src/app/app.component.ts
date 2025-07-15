@@ -20,4 +20,13 @@ export class AppComponent {
   redirectToRegistration(){
     this.router.navigate(['/register'])
   }
+
+  // constructor() {
+  //   this.apiservice.getUsers().subscribe(data => {
+  //     console.log('API Response:', data);
+  //     this.users = data;
+  //   }, error => {
+  //     console.error('API Error:', error);
+  //   });
+  // }
 }

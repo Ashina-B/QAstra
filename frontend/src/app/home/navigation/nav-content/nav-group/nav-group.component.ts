@@ -23,10 +23,10 @@ export class NavGroupComponent implements OnInit {
     }
     
     let current_url = this.location.path();
-    // eslint-disable-next-line
+     
     // @ts-ignore
     if (this.location['_baseHref']) {
-      // eslint-disable-next-line
+       
       // @ts-ignore
       current_url = this.location['_baseHref'] + this.location.path();
     }
