@@ -3,12 +3,20 @@
   "version": "1.0.0",
   "description": "<<<<<<< HEAD\r # QAstra\r =======\r # QAstra",
   "main": "eslint.config.js",
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --fix",
     "lint_frontend": "npx eslint frontend",
     "lint_backend": "npx eslint backend",
-    "precommit": "npx eslint . --fix"
+    "prepare": "husky install",
+    "precommit": "eslint . --fix"
+  },
+
+  "lint-staged": {
+  "*.{js,ts,tsx}": [
+    "eslint . --fix"
+    ]
   },
 
   "author": "",
