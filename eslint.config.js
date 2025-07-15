@@ -32,7 +32,7 @@ export default [
       }
     },
     rules: {
-      // Optional: frontend-specific rules
+      '@typescript-eslint/no-explicit-any': 'off'
     }
   },
 

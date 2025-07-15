@@ -16,7 +16,7 @@ export class EmailService {
     
   }
 
- sendRegistrationEmail(recipient: string, token:string): Observable<unknown> {
+ sendRegistrationEmail(recipient: string, token:string): Observable<any> {
     if (isPlatformBrowser(this.platformId)){
       return this.http.post(`${this.apiUrl}/registration_email`,  { recipient, token })
       }else{
@@ -24,7 +24,7 @@ export class EmailService {
         }
   }
 
-  resendActivationLink(recipient:string, token:string): Observable<unknown>{
+  resendActivationLink(recipient:string, token:string): Observable<any>{
     if (isPlatformBrowser(this.platformId)){
       return this.http.post(`${this.apiUrl}/resend_activation_email`,  { recipient, token })
       }else{

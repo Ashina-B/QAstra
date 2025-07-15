@@ -12,7 +12,7 @@ export class UsersService {
 
   private apiUrl = 'http://localhost:5000/api/users';
   
-    getUsers(): Observable<unknown> {
+    getUsers(): Observable<any> {
     if (isPlatformBrowser(this.platformId)){
       return this.http.get(`${this.apiUrl}/getUsers`);
     }else{
@@ -21,7 +21,7 @@ export class UsersService {
       
     }
 
-    registerUser(requestData:unknown): Observable<unknown> {
+    registerUser(requestData:any): Observable<any> {
       if (isPlatformBrowser(this.platformId)){
         return this.http.post(`${this.apiUrl}/registerUser`, requestData)
       }else{
@@ -29,7 +29,7 @@ export class UsersService {
       }
     }
 
-    activateAccount(token:string):Observable<unknown> {
+    activateAccount(token:string):Observable<any> {
       if (isPlatformBrowser(this.platformId)){
         return this.http.post(`${this.apiUrl}/activateAccount`, { token })
       }else{
