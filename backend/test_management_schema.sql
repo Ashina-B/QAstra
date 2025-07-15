@@ -145,6 +145,13 @@ ADD is_active BIT DEFAULT 0;
 ALTER TABLE users 
 ADD activation_token VARCHAR(255);
 
+--Add reset token and reset token expiry columns
+ALTER TABLE users 
+ADD reset_token VARCHAR(255);
+
+ALTER TABLE users 
+ADD reset_token_expiry DATETIME;
+
 
 
 

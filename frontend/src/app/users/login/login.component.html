@@ -1,8 +1,9 @@
 <div class="auth-main">
     <div class="auth-wrapper v3">
+      <app-alert></app-alert>
       <div class="auth-form">
         <div class="auth-header">
-          <a href="javascript:"><img src="../../../assets/images/logo-dark.svg" alt="logo" /></a>
+          <a href="javascript:"><img src="assets/images/QAstra logo horizontal.png" alt="logo" /></a>
         </div>
         <div class="card my-5">
           <div class="card-body">
@@ -10,29 +11,64 @@
               <h3 class="mb-0"><b>Login</b></h3>
               <a [routerLink]="['/register']" class="link-primary">Don't have an account?</a>
             </div>
-            <div class="form-group mb-3">
-              <label class="form-label" for="email">Email Address</label>
-              <input type="email" class="form-control" id="email" placeholder="Email Address"/>
-            </div>
-            <div class="form-group mb-3">
-              <label class="form-label" for="password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password"/>
-            </div>
-            <div class="d-flex mt-1 justify-content-between">
-              <div class="form-check">
-                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+            <form [formGroup] ="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group mb-3">
+                <div class="error-message" *ngIf="loginForm.get('emailAddress')?.invalid && loginForm.get('emailAddress')?.touched">
+                  <span id="emailAddress-error-message">A valid email address is required</span>
+                </div>
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" formControlName="emailAddress" class="form-control" id="email" placeholder="Email Address"/>
               </div>
-                <a class="link-primary" href="javascript:">Forgot Password?</a>
-            </div>
-            <div class="d-grid mt-4">
-              <button type="button" class="btn btn-primary">Login</button>
-            </div>
+              <div class="form-group mb-3">
+                <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                  <span id="password-error-message">A valid password is required</span>
+                </div>
+                <label class="form-label" for="password">Password</label>
+                <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password"/>
+              </div>
+              <div class="d-flex mt-1 justify-content-between">
+                <div class="form-check">
+                  <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                  <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+                </div>
+                  <a href="javascript:void(0)" (click)="forgotpasswordModal = true">Forgot Password?</a>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || loginForm.invalid">Login</button>
+              </div>
+              <div class="error-message" *ngIf="errorMessage">
+                <span>{{errorMessage}}</span>
+              </div>
+            </form>
           </div>
         </div>
         <div class="auth-footer row">
           <div class="col-auto my-1">
           </div>
+        </div>
+      </div>
+      <div class="forgotPasswordModal" *ngIf="forgotpasswordModal">
+        <div class="auth-form">
+          <div class="card my-5">
+            <div class="card-body">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+              <h3 class="mb-0"><b>Forgot Password</b></h3>
+              <a href="javascript:void(0)" (click)="forgotpasswordModal = false">X</a>
+            </div>
+            <form [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassword()">
+            <div class="form-group mb-3">
+                <div class="error-message" *ngIf="forgotPasswordForm.get('email')?.invalid && forgotPasswordForm.get('email')?.touched">
+                  <span id="email-error-message">A valid email address is required</span>
+                </div>
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email Address"/>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || forgotPasswordForm.invalid">Send Reset Email</button>
+              </div>
+          </form> 
+          </div>
+          </div>            
         </div>
       </div>
     </div>
