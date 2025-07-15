@@ -8,14 +8,9 @@
     "lint": "npx eslint . --fix",
     "lint_frontend": "npx eslint frontend",
     "lint_backend": "npx eslint backend",
-    "prepare": "husky install"
+    "precommit": "npx eslint . --fix"
   },
-  "lint-staged": {
-  "*.{js,ts,tsx}": [
-    "eslint --fix",
-    "git add"
-    ]
-  },
+
   "author": "",
   "license": "ISC",
   "type": "module",
@@ -25,6 +20,9 @@
     "@types/mocha": "^10.0.10",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
     "@typescript-eslint/parser": "^8.36.0",
+    "eslint": "^9.31.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "typescript": "^5.8.3"
   }
 }
