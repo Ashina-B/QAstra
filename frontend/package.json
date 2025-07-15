@@ -22,6 +22,9 @@
   },
   "description": "",
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.0.2"
+    "@angular-devkit/build-angular": "^20.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "eslint": "^9.31.0"
   }
 }
