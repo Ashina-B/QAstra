@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "ng": "ng",
     "test": "ng test --browsers=ChromeHeadless --watch=false --code-coverage"
   },
   "keywords": [],
