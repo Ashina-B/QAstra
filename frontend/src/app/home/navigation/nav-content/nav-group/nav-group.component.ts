@@ -12,6 +12,7 @@ import { NavItemComponent } from '../nav-item/nav-item.component';
   styleUrl: './nav-group.component.css'
 })
 export class NavGroupComponent implements OnInit {
+  component: { title: string; icon: string; url: string; children: never[]; } | undefined;
   constructor(private location: Location,@Inject(PLATFORM_ID) private platformId: object) {}
 
   @Input({ required: true }) item!: NavigationItem;

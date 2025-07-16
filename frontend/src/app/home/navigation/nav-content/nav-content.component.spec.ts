@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { of } from 'rxjs';
 import { NavContentComponent } from './nav-content.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('NavContentComponent', () => {
   let component: NavContentComponent;
@@ -8,7 +9,21 @@ describe('NavContentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavContentComponent]
+      imports: [NavContentComponent],
+      providers: [
+              {
+                provide: ActivatedRoute,
+                useValue: {
+                  params: of({}),
+                  queryParams: of({}),
+                  snapshot: {
+                    data: {},
+                    paramMap: new Map(),
+                    queryParamMap: new Map()
+                  }
+                }
+              }
+            ]
     })
     .compileComponents();
 
@@ -21,3 +36,5 @@ describe('NavContentComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
