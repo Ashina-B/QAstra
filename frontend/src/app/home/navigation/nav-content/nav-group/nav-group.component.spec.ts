@@ -14,6 +14,15 @@ describe('NavGroupComponent', () => {
 
     fixture = TestBed.createComponent(NavGroupComponent);
     component = fixture.componentInstance;
+
+    component.item = {
+      id: '',
+      title: '',
+      icon: '',
+      url: '/dashboard',
+      type: 'group',
+      children: []
+    };
     fixture.detectChanges();
   });
 

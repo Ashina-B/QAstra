@@ -14,6 +14,14 @@ describe('NavCollapseComponent', () => {
 
     fixture = TestBed.createComponent(NavCollapseComponent);
     component = fixture.componentInstance;
+    component.item = {
+      id: '',
+      title: '',
+      icon: 'home',
+      url: '/dashboard',
+      type: 'group',
+      children: []
+    };
     fixture.detectChanges();
   });
 

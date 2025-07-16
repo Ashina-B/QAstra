@@ -11,8 +11,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
   await TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
-    declarations: [LoginComponent],
+    imports: [LoginComponent, HttpClientTestingModule],
     providers: [provideRouter([])] 
   }).compileComponents();
 
