@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -39,7 +39,12 @@ export class UsersService {
 
     loginUser(userCreds:any): Observable<any> {
       if (isPlatformBrowser(this.platformId)){
-        return this.http.post(`${this.apiUrl}/loginUser`, userCreds)
+        return this.http.post<any>(`${this.apiUrl}/loginUser`, userCreds).pipe(tap((res) => {
+          if (res.Token) {
+            localStorage.setItem('accessToken', res.Token);
+          }
+        }
+      ));
       }else{
         return of([])
       }
@@ -59,5 +64,12 @@ export class UsersService {
       }else{
         return of([])
       }
+    }
+
+    logout(): void{
+       if (isPlatformBrowser(this.platformId)) {
+          localStorage.removeItem('accessToken');
+          localStorage.clear();
+  }
     }
 }
