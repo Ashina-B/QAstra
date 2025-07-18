@@ -125,5 +125,59 @@ export const NavigationItems: NavigationItem[] = [
         external: true
       }
     ]
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'support',
+        title: 'Support',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/',
+        icon: 'question-circle',
+        breadcrumbs: false
+      },
+      {
+        id: 'account_settings',
+        title: 'Account Settings',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/',
+        icon: 'user',
+        breadcrumbs: false
+      },
+      {
+        id: 'privacy_center',
+        title: 'Privacy Center',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/',
+        icon: 'lock',
+        breadcrumbs: false
+      },
+      {
+        id: 'feedback',
+        title: 'Feedback',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/',
+        icon: 'comment',
+        breadcrumbs: false
+      },
+      {
+        id: 'history',
+        title: 'History',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/',
+        icon: 'unordered-list',
+        breadcrumbs: false
+      }
+    ]
   }
 ];
+

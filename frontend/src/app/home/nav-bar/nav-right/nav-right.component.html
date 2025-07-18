@@ -1,153 +1,93 @@
-<ul class="list-unstyled">
-  <li class="pc-h-item">
-    <a href="https://github.com/codedthemes/mantis-free-angular-admin-template" target="_blank" class="pc-head-link me-0 bg-gray-200">
-      <i class="fab fa-github"></i>
+<ul class="list-unstyled flex items-center gap-2">
+  <!-- GitHub Link -->
+  <!-- <li>
+    <a mat-icon-button href="https://github.com/codedthemes/mantis-free-angular-admin-template" target="_blank" class="bg-gray-200">
+      <mat-icon svgIcon="github">code</mat-icon>
     </a>
-  </li>
-  <li class="dropdown pc-h-item" ngbDropdown>
-    <a class="pc-head-link dropdown-toggle arrow-none me-0 bg-gray-200" data-bs-toggle="dropdown" ngbDropdownToggle>
-      <i class="fas fa-bell"> </i>
-      <span class="badge bg-primary pc-h-badge">3</span>
-    </a>
-    <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
-      <div class="dropdown-header d-flex align-items-center justify-content-between">
+  </li> -->
+  
+  <li class="dropdown pc-h-item">
+    <button class="pc-head-link dropdown-toggle arrow-none me-0 bg-gray-200" mat-icon-button [matMenuTriggerFor]="notificationMenu">
+      <mat-icon>notifications</mat-icon>
+      <span class="badge bg-primary pc-h-badge" matBadgeColor="primary" matBadgeOverlap="false">3</span>
+    </button>
+
+    <mat-menu class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown" #notificationMenu="matMenu" class="notification-menu">
+      <div class="px-4 pt-2">
         <h5 class="m-0">Notification</h5>
-        <a class="bg-transparent"><i class="text-success d-flex f-20" antIcon theme="outline" type="check-circle"></i></a>
       </div>
-      <div class="dropdown-divider"></div>
-      <ng-scrollbar style="min-height: 300px" visibility="hover">
-        <div class="dropdown-header px-0 text-wrap header-notification-scroll">
-          <div class="list-group list-group-flush w-100">
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <div class="user-avatar bg-light-success"><i class="d-flex" antIcon theme="outline" type="gift"></i></div>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <span class="float-end text-muted">3:00 AM</span>
-                  <p class="text-body mb-0">
-                    It's
-                    <b>Cristina danny's</b>
-                    birthday today.
-                  </p>
-                  <span class="text-muted">2 min ago</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <div class="user-avatar bg-light-primary"><i class="d-flex" antIcon theme="outline" type="message"></i></div>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <span class="float-end text-muted">6:00 PM</span>
-                  <p class="text-body mb-1">
-                    <b>Aida Burg</b>
-                    commented your post.
-                  </p>
-                  <span class="text-muted">5 August</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <div class="user-avatar bg-light-danger"><i class="d-flex" antIcon theme="outline" type="setting"></i></div>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <span class="float-end text-muted">2:45 PM</span>
-                  <p class="text-body mb-1">
-                    Your Profile is Complete &nbsp;
-                    <b>60%</b>
-                  </p>
-                  <span class="text-muted">7 hours ago</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <div class="user-avatar bg-light-primary"><i class="d-flex" antIcon theme="outline" type="phone"></i></div>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <span class="float-end text-muted">9:10 PM</span>
-                  <p class="text-body mb-1">
-                    <b>Cristina Danny</b>
-                    invited to join
-                    <b>Meeting.</b>
-                  </p>
-                  <span class="text-muted">Daily scrum meeting time</span>
-                </div>
-              </div>
-            </a>
-          </div>
+      <mat-divider></mat-divider>
+      <div style="max-height: 300px; overflow: auto;" class="py-2 px-3">
+        <div *ngFor="let item of notifications">
+          <a class="dropdown-item d-flex gap-2">
+            <div class="user-avatar bg-light-success">
+              <mat-icon>{{ item.icon }}</mat-icon>
+            </div>
+            <div class="flex-grow-1">
+              <span class="float-end text-muted">{{ item.time }}</span>
+              <p class="mb-1">{{ item.message }}</p>
+              <small class="text-muted">{{ item.subtext }}</small>
+            </div>
+          </a>
         </div>
-      </ng-scrollbar>
-      <div class="dropdown-divider"></div>
-      <div class="text-center py-2">
-        <a class="link-primary">View all</a>
       </div>
-    </div>
+      <mat-divider></mat-divider>
+      <button mat-button class="w-full text-center">View all</button>
+    </mat-menu>
   </li>
-  <li class="dropdown pc-h-item header-user-profile" ngbDropdown>
-    <a class="pc-head-link dropdown-toggle arrow-none me-0" ngbDropdownToggle>
-      <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar me-2" />
-      <span class="f-w-600">John Doe</span>
-    </a>
-    <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
-      <div class="dropdown-header">
-        <div class="d-flex mb-1">
-          <div class="flex-shrink-0">
-            <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar wid-35" />
-          </div>
-          <div class="flex-grow-1 ms-3 text-start">
+<li class="dropdown pc-h-item header-user-profile">
+    <button mat-button [matMenuTriggerFor]="userMenu" class="pc-head-link">
+      <img src="assets/images/user/avatar-2.jpg" class="user-avatar me-2" />
+      <span>John Doe</span>
+    </button>
+
+    <mat-menu #userMenu="matMenu" class="user-profile-menu">
+      <div class="px-3 py-2">
+        <div class="d-flex align-items-center">
+          <img src="assets/images/user/avatar-2.jpg" class="user-avatar wid-35 me-2" />
+          <div>
             <h6 class="mb-0">JWT User</h6>
             <span>UI/UX Designer</span>
           </div>
-          <a href="javascript:" class="bg-transparent"><i class="d-flex f-20" antIcon theme="outline" type="logout"></i></a>
         </div>
       </div>
+      <div class="px-3 py-2" *ngFor="let task of profile">
+            <button mat-menu-item>
+              <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
+              <span>{{ task.title }}</span>
+            </button>
+          </div>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon class="text-muted">logout</mat-icon>
+            <span>Logout</span>
+          </button>
+
+
+      <!-- <mat-divider></mat-divider>
+
       <mat-tab-group>
-        <mat-tab ngbNavItem="1">
-          <a ngbNavLink>
-            <i antIcon theme="outline" type="user" class="me-2"></i>
-            Profile
-          </a>
-          <ng-template ngbNavContent>
-            @for (task of profile; track task) {
-              <div>
-                <a class="dropdown-item">
-                  <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
-                  <span>{{ task.title }}</span>
-                </a>
-              </div>
-            }
-            <div>
-              <a class="dropdown-item">
-                <i class="text-muted" antIcon theme="outline" type="logout"></i>
-                <span>Logout</span>
-              </a>
-            </div>
-          </ng-template>
+        <mat-tab label="Profile">
+          <div class="px-3 py-2" *ngFor="let task of profile">
+            <button mat-menu-item>
+              <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
+              <span>{{ task.title }}</span>
+            </button>
+          </div>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon class="text-muted">logout</mat-icon>
+            <span>Logout</span>
+          </button>
         </mat-tab>
-        <mat-tab ngbNavItem="2">
-          <a ngbNavLink>
-            <i class="me-2" antIcon theme="outline" type="setting"></i>
-            Setting
-          </a>
-          <ng-template ngbNavContent>
-            @for (task of setting; track task) {
-              <div>
-                <a class="dropdown-item">
-                  <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
-                  <span>{{ task.title }}</span>
-                </a>
-              </div>
-            }
-          </ng-template>
+
+        <mat-tab label="Setting">
+          <div class="px-3 py-2" *ngFor="let task of setting">
+            <button mat-menu-item>
+              <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
+              <span>{{ task.title }}</span>
+            </button>
+          </div>
         </mat-tab>
-      </mat-tab-group>
-      <!-- <div [ngbNavOutlet]="nav"></div> -->
-    </div>
+      </mat-tab-group> -->
+    </mat-menu>
   </li>
 </ul>
