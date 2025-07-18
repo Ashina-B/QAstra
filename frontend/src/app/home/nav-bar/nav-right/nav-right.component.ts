@@ -33,7 +33,7 @@ import { UsersService } from '../../../services/users.service';
 @Component({
   selector: 'app-nav-right',
   standalone: true,
-  imports: [CommonModule, NgScrollbarModule, MatIconModule, MatTab, MatTabGroup, MatMenuModule, MatBadgeModule, MatButtonModule, MatDividerModule],
+  imports: [CommonModule, NgScrollbarModule, MatIconModule, MatMenuModule, MatBadgeModule, MatButtonModule, MatDividerModule],
   templateUrl: './nav-right.component.html',
   styleUrl: './nav-right.component.css'
 })
@@ -52,13 +52,7 @@ export class NavRightComponent {
     { icon: 'wallet', title: 'Billing' }
   ];
 
-  setting = [
-    { icon: 'question-circle', title: 'Support' },
-    { icon: 'user', title: 'Account Settings' },
-    { icon: 'lock', title: 'Privacy Center' },
-    { icon: 'comment', title: 'Feedback' },
-    { icon: 'unordered-list', title: 'History' }
-  ];
+  
 
   notifications = [
   { icon: 'card_giftcard', message: `It's Cristina Danny's birthday today.`, subtext: '2 min ago', time: '3:00 AM' },
