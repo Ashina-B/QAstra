@@ -6,7 +6,7 @@ import { AccountActivationComponent } from './users/account-activation/account-a
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { ProjectComponent } from './project/project.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from './guards/auth.guard';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent, 
@@ -14,7 +14,7 @@ export const routes: Routes = [
             {path: "project", component: ProjectComponent},
             {path: "dashboard", component: DashboardComponent}
         ],
-        canActivate: [AuthGuard]
+        canActivate: [authGuard]
     },
     {path: 'register', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
