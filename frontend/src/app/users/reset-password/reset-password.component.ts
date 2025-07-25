@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertComponent } from '../../shared_components/alert/alert.component';
-import { UsersService } from '../../services/users.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,7 +21,7 @@ export class ResetPasswordComponent {
   @ViewChild(AlertComponent) appAlert!: AlertComponent;
 
   constructor(
-        private usersService: UsersService, 
+        private authService: AuthService, 
         private formBuilder: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
@@ -53,7 +53,7 @@ export class ResetPasswordComponent {
       this.isSubmitting = true
       if(this.resetPasswordForm.valid && this.token){
         this.password = this.resetPasswordForm.get('password')?.value
-        this.usersService.resetPassword(this.token, this.password).subscribe({
+        this.authService.resetPassword(this.token, this.password).subscribe({
           next: (response) => {
             this.appAlert.showAlert(
               'Password Reset Sucessful ✅', 

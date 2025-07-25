@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms'
 import { CommonModule } from '@angular/common';
-import { UsersService } from '../../services/users.service';
 import { User } from '../../models/users.interface';
 import { EmailService } from '../../services/email.service';
 import { AlertComponent } from '../../shared_components/alert/alert.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -23,7 +23,7 @@ export class RegistrationComponent {
   @ViewChild(AlertComponent) appAlert!: AlertComponent;
 
   constructor(
-    private usersService: UsersService, 
+    private authService: AuthService, 
     private formBuilder: FormBuilder, 
     private emailService: EmailService
   ){}
@@ -58,7 +58,7 @@ export class RegistrationComponent {
         email: this.registrationForm.get('emailAddress')?.value,
         password: this.registrationForm.get('password')?.value
       }
-      this.usersService.registerUser(this.user).subscribe({
+      this.authService.registerUser(this.user).subscribe({
         next: (response) => {
           if (!this.emailService || !this.emailService.sendRegistrationEmail) {
             console.error('emailService is not defined or sendRegistrationEmail is missing');

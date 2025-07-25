@@ -29,6 +29,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { UsersService } from '../../../services/users.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -65,7 +66,7 @@ export class NavRightComponent {
   constructor(
     private iconService: IconService,
     @Inject(PLATFORM_ID) private platformId: object,
-    private userService: UsersService
+    private authService: AuthService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.windowWidth = window.innerWidth;
@@ -94,6 +95,6 @@ export class NavRightComponent {
 
   logout(){
     console.log("clicked logout")
-    this.userService.logout();
+    this.authService.logout();
   }
 }

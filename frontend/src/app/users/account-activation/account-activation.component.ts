@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { EmailService } from '../../services/email.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AlertComponent } from '../../shared_components/alert/alert.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-account-activation',
@@ -24,7 +24,7 @@ export class AccountActivationComponent {
   @ViewChild(AlertComponent) appAlert!: AlertComponent;
 
   constructor(
-    private userService: UsersService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private emailService: EmailService,
     private router:Router,
@@ -35,7 +35,7 @@ export class AccountActivationComponent {
     this.token = this.route.snapshot.queryParamMap.get('token');
 
     if(this.token){
-      this.userService.activateAccount(this.token).subscribe({
+      this.authService.activateAccount(this.token).subscribe({
         next: (response) => {
           this.title = response.title;
           this.message = response.message;
