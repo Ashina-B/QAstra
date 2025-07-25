@@ -2,9 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AlertComponent } from '../../shared_components/alert/alert.component';
-import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +22,7 @@ export class LoginComponent {
   @ViewChild(AlertComponent) appAlert!: AlertComponent;
 
   constructor(
-      private usersService: UsersService, 
+      private authService: AuthService, 
       private formBuilder: FormBuilder, 
       private router: Router
     ){}
@@ -55,7 +54,7 @@ export class LoginComponent {
       if(this.forgotPasswordForm.valid){
         this.isSubmitting = true;
         let email = this.forgotPasswordForm.get('email')?.value
-        this.usersService.forgotPassword(email).subscribe({
+        this.authService.forgotPassword(email).subscribe({
         next: (response) => {
           this.appAlert.showAlert(
               'Reset Email Sent ✅', 
@@ -86,7 +85,7 @@ export class LoginComponent {
 
         console.log(this.userCreds)
 
-        this.usersService.loginUser(this.userCreds).subscribe({
+        this.authService.loginUser(this.userCreds).subscribe({
           next: () => {
             this.router.navigate([''])
           },

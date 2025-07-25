@@ -1,10 +1,7 @@
 import { Component, Inject, PLATFORM_ID, input, output } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { IconService } from '@ant-design/icons-angular';
-import {
-  NgScrollbarModule,
-  ScrollbarVisibility
-} from 'ngx-scrollbar';
+import {  NgScrollbarModule,  ScrollbarVisibility} from 'ngx-scrollbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 
@@ -27,11 +24,17 @@ import {
   UserOutline,
   WalletOutline
 } from '@ant-design/icons-angular/icons';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { UsersService } from '../../../services/users.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-nav-right',
   standalone: true,
-  imports: [CommonModule, NgScrollbarModule, MatIconModule, MatTab, MatTabGroup],
+  imports: [CommonModule, NgScrollbarModule, MatIconModule, MatMenuModule, MatBadgeModule, MatButtonModule, MatDividerModule],
   templateUrl: './nav-right.component.html',
   styleUrl: './nav-right.component.css'
 })
@@ -50,17 +53,20 @@ export class NavRightComponent {
     { icon: 'wallet', title: 'Billing' }
   ];
 
-  setting = [
-    { icon: 'question-circle', title: 'Support' },
-    { icon: 'user', title: 'Account Settings' },
-    { icon: 'lock', title: 'Privacy Center' },
-    { icon: 'comment', title: 'Feedback' },
-    { icon: 'unordered-list', title: 'History' }
-  ];
+  
+
+  notifications = [
+  { icon: 'card_giftcard', message: `It's Cristina Danny's birthday today.`, subtext: '2 min ago', time: '3:00 AM' },
+  { icon: 'chat', message: 'Aida Burg commented your post.', subtext: '5 August', time: '6:00 PM' },
+  { icon: 'settings', message: 'Your Profile is Complete 60%', subtext: '7 hours ago', time: '2:45 PM' },
+  { icon: 'call', message: 'Cristina Danny invited to join Meeting.', subtext: 'Daily scrum meeting time', time: '9:10 PM' }
+];
+
 
   constructor(
     private iconService: IconService,
-    @Inject(PLATFORM_ID) private platformId: object
+    @Inject(PLATFORM_ID) private platformId: object,
+    private authService: AuthService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.windowWidth = window.innerWidth;
@@ -85,5 +91,10 @@ export class NavRightComponent {
       GithubOutline,
       WalletOutline
     );
+  }
+
+  logout(){
+    console.log("clicked logout")
+    this.authService.logout();
   }
 }
