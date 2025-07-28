@@ -29,11 +29,15 @@ export class AuthService {
       }
     }
 
-    loginUser(userCreds:any): Observable<any> {
+    loginUser(userCreds:any, keep_me_signed_in:boolean): Observable<any> {
       if (isPlatformBrowser(this.platformId)){
         return this.http.post<any>(`${this.apiUrl}/loginUser`, userCreds).pipe(tap((res) => {
           if (res.Token) {
-            localStorage.setItem('accessToken', res.Token);
+            if(keep_me_signed_in){
+              localStorage.setItem('accessToken', res.Token);
+            }else{
+              sessionStorage.setItem('accessToken', res.Token);
+            }     
           }
         }
       ));
@@ -61,13 +65,15 @@ export class AuthService {
     logout(): void{
        if (isPlatformBrowser(this.platformId)) {
           localStorage.removeItem('accessToken');
+          sessionStorage.removeItem('accessToken');
           localStorage.clear();
+          sessionStorage.clear();
           this.router.navigate(['/login'])
       }
     }
 
     getToken(): string | null{
-      return localStorage.getItem('accessToken');
+      return localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
     }
 
     isAuthenticated(): boolean {
