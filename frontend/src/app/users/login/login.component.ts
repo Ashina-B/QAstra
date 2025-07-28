@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AlertComponent } from '../../shared_components/alert/alert.component';
 import { CommonModule } from '@angular/common';
@@ -20,6 +20,7 @@ export class LoginComponent {
   errorMessage!:string
   userCreds:any;
   @ViewChild(AlertComponent) appAlert!: AlertComponent;
+  keep_me_signed_in = false;
 
   constructor(
       private authService: AuthService, 
@@ -30,7 +31,8 @@ export class LoginComponent {
     ngOnInit(): void {
       this.loginForm = this.formBuilder.group({
         emailAddress: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required, this.passwordValidator])
+        password: new FormControl('', [Validators.required, this.passwordValidator]),
+        keep_me_signed_in: new FormControl(false)
       })
       this.forgotPasswordForm = this.formBuilder.group({
         email: new FormControl('', [Validators.required, Validators.email])
@@ -83,9 +85,9 @@ export class LoginComponent {
           "password": this.loginForm.get('password')?.value
         }
 
-        console.log(this.userCreds)
+        this.keep_me_signed_in = this.loginForm.get('keep_me_signed_in')?.value
 
-        this.authService.loginUser(this.userCreds).subscribe({
+        this.authService.loginUser(this.userCreds, this.keep_me_signed_in).subscribe({
           next: () => {
             this.router.navigate([''])
           },
