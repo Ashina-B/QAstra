@@ -17,7 +17,6 @@ export class NavigationComponent {
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
-      console.log(window.location.href);
       this.windowWidth = window.innerWidth;
     }
   }

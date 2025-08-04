@@ -1,0 +1,17 @@
+::ng-deep .pc-header {
+  left: 0 !important;
+}
+
+.actions{
+  display: flex;
+  gap: 1rem;
+}
+
+.create_project{
+  align-content: center;
+}
+
+td:last-child {
+  text-align: right;
+  vertical-align: middle;
+}

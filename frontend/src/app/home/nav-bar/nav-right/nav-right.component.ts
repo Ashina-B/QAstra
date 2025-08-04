@@ -30,11 +30,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { UsersService } from '../../../services/users.service';
 import { AuthService } from '../../../services/auth.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav-right',
   standalone: true,
-  imports: [CommonModule, NgScrollbarModule, MatIconModule, MatMenuModule, MatBadgeModule, MatButtonModule, MatDividerModule],
+  imports: [CommonModule, NgScrollbarModule, MatIconModule, MatMenuModule, MatBadgeModule, MatButtonModule, MatDividerModule, RouterLink],
   templateUrl: './nav-right.component.html',
   styleUrl: './nav-right.component.css'
 })

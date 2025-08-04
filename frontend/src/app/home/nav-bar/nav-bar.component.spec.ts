@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NavBarComponent } from './nav-bar.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('NavBarComponent', () => {
   let component: NavBarComponent;
@@ -8,7 +9,19 @@ describe('NavBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavBarComponent,HttpClientTestingModule]
+      imports: [NavBarComponent,HttpClientTestingModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => 'mock-id', // or whatever value your test expects
+              },
+            },
+          },
+        },
+      ],
     })
     .compileComponents();
 

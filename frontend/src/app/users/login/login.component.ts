@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AlertComponent } from '../../shared_components/alert/alert.component';
 import { CommonModule } from '@angular/common';

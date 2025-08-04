@@ -1,0 +1,32 @@
+<div class="container" *ngIf="isVisible">
+  <app-alert></app-alert>
+    <div class="card" *ngIf="isVisible">
+        <form [formGroup] ="createProjectForm" (ngSubmit)="onSubmit()">
+            <div class="form-title">
+                <h5>Create a Project</h5>
+                <i class="fa fa-window-close" aria-hidden="true" style="font-size: 24px;" (click)="closeForm()"></i>
+            </div>
+             <div class="form-group mb-3">
+                <div class="error-message" *ngIf="createProjectForm.get('projectName')?.invalid && createProjectForm.get('projectName')?.touched">
+                  <span id="projectName-error-message">A project name is required</span>
+                </div>
+                <label class="form-label" for="projectName">Project Name</label>
+                <input type="text" formControlName="projectName" class="form-control" id="projectname" placeholder="Project Name"/>
+              </div>
+              <div class="form-group mb-3">
+                <!-- <div class="error-message" *ngIf="createprojectForm.get('projectDescription')?.invalid && createprojectForm.get('projectDescription')?.touched">
+                  <span id="projectDescription-error-message">Project Description is required</span>
+                </div> -->
+                <label class="form-label" for="projectDescription">Project Description</label>
+                <textarea rows="5" formControlName="projectDescription" class="form-control" id="projectDescription" placeholder="Write a few sentences about your project"></textarea>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || createProjectForm.invalid">Create Project</button>
+              </div>
+              <div class="error-message" *ngIf="errorMessage">
+                <span>{{errorMessage}}</span>
+              </div>
+        </form>
+    </div>
+</div>
+

@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NavRightComponent } from './nav-right.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { ProjectsComponent } from './projects.component';
 import { ActivatedRoute } from '@angular/router';
 
-describe('NavRightComponent', () => {
-  let component: NavRightComponent;
-  let fixture: ComponentFixture<NavRightComponent>;
+describe('ProjectComponent', () => {
+  let component: ProjectsComponent;
+  let fixture: ComponentFixture<ProjectsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavRightComponent, HttpClientTestingModule],
+      imports: [ProjectsComponent, HttpClientTestingModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -25,7 +25,7 @@ describe('NavRightComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavRightComponent);
+    fixture = TestBed.createComponent(ProjectsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
