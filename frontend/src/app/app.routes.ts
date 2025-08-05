@@ -4,14 +4,14 @@ import { LoginComponent } from './users/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AccountActivationComponent } from './users/account-activation/account-activation.component';
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
-import { ProjectComponent } from './project/project.component';
+import { ProjectsComponent } from './projects/projects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from './guards/auth.guard';
+import { CreateProjectComponnet } from './projects/create-project/create-project';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent, 
         children:[
-            {path: "project", component: ProjectComponent},
             {path: "dashboard", component: DashboardComponent}
         ],
         canActivate: [authGuard]
@@ -19,5 +19,7 @@ export const routes: Routes = [
     {path: 'register', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
     {path: 'activate-account', component:AccountActivationComponent},
-    {path: 'reset-password', component:ResetPasswordComponent}
+    {path: 'reset-password', component:ResetPasswordComponent},
+    {path: "projects", component: ProjectsComponent, canActivate: [authGuard]},
+    {path: "create-project", component: CreateProjectComponnet, canActivate: [authGuard]}
 ];

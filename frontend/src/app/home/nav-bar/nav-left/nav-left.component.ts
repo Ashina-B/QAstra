@@ -14,6 +14,7 @@ import {
   MenuFoldOutline,
   SearchOutline
 } from '@ant-design/icons-angular/icons';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav-left',
@@ -31,7 +32,8 @@ export class NavLeftComponent {
 
   constructor(
     private iconService: IconService,
-    @Inject(PLATFORM_ID) private platformId: object
+    @Inject(PLATFORM_ID) private platformId: object,
+    private router: Router
   ) {
     this.iconService.addIcon(MenuUnfoldOutline, MenuFoldOutline, SearchOutline);
 

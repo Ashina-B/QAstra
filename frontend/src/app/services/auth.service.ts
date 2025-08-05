@@ -35,8 +35,10 @@ export class AuthService {
           if (res.Token) {
             if(keep_me_signed_in){
               localStorage.setItem('accessToken', res.Token);
+              localStorage.setItem('userId', res.user_id)
             }else{
               sessionStorage.setItem('accessToken', res.Token);
+              sessionStorage.setItem('userId', res.user_id)
             }     
           }
         }
@@ -73,7 +75,17 @@ export class AuthService {
     }
 
     getToken(): string | null{
-      return localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
+      if (isPlatformBrowser(this.platformId)) {
+        return localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
+      }
+      return null;
+    }
+
+    getUserId(): string | null{
+      if (isPlatformBrowser(this.platformId)) {
+        return localStorage.getItem('userId') || sessionStorage.getItem('userId');
+      }
+      return null;
     }
 
     isAuthenticated(): boolean {

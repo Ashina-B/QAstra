@@ -5,3 +5,7 @@
     margin-right: calc(var(--bs-gutter-x) * .5);
     margin-left: calc(var(--bs-gutter-x) * .5);
 }
+
+.content{
+    padding: 50px;
+}

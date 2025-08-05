@@ -30,11 +30,6 @@ export class AlertComponent {
     this.type = type;
     this.cardTitle = title;
     this.isVisible = true;
-
-    // Auto-hide after 3 seconds
-    // setTimeout(() => {
-    //   this.isVisible = false;
-    // }, 3000);
   }
 
   closeMessage() {

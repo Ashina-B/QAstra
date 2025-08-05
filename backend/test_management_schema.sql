@@ -145,12 +145,31 @@ ADD is_active BIT DEFAULT 0;
 ALTER TABLE users 
 ADD activation_token VARCHAR(255);
 
---Add reset token and reset token expiry columns
-ALTER TABLE users 
-ADD reset_token VARCHAR(255);
+--Add a table to store project members
+CREATE TABLE project_members (
+  project_id VARCHAR(36),
+  user_id VARCHAR(36),
+  role_id VARCHAR(36),
+  joined_at DATETIME DEFAULT GETDATE(),
+  isdeleted BIT DEFAULT 0,
+  PRIMARY KEY (project_id, user_id),
+  FOREIGN KEY (project_id) REFERENCES projects(project_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
 
-ALTER TABLE users 
-ADD reset_token_expiry DATETIME;
+--remove the role column from users table
+ALTER TABLE users
+DROP CONSTRAINT FK__users__role_id__412EB0B6;
+
+ALTER TABLE users
+DROP COLUMN role_id;
+
+--Drop unique constraint from project name column
+SELECT name
+FROM sys.indexes
+WHERE object_id = OBJECT_ID('projects') AND is_unique = 1;
+
+ALTER TABLE projects DROP CONSTRAINT UQ__projects__72E12F1BA12BD738;
 
 
 
