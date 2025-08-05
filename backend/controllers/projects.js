@@ -6,8 +6,8 @@ exports.createProject = async(req, res) => {
         const pool = await poolPromise;
 
         //check if the required fields are provided
-        if (!name || !description || !created_by) {
-            return res.status(400).json({ message: 'Project name, description and created by are required.' });
+        if (!name || !created_by) {
+            return res.status(400).json({ message: 'Project name and created by are required.' });
         }
 
         await pool.request()

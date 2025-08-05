@@ -2,7 +2,7 @@
     <div class="navbar-container">
         <app-nav-bar></app-nav-bar>
     </div>
-    <app-create-project></app-create-project>
+    <app-create-project (projectCreated)="onProjectCreated()"></app-create-project>
     <div class="container">
         <div class="header-wrapper">
             <div class="title">
@@ -22,6 +22,9 @@
         </div>
         <div class="no_items" *ngIf="projects && projects.length === 0">
             <p>There are no projects at the moment</p>
+        </div>
+        <div class="no_items" *ngIf="error_message">
+            <p>{{error_message}}</p>
         </div>
         <div class="table-responsive" *ngIf="projects && projects.length > 0">
         <table class="table table-hover mb-0">

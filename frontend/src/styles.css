@@ -348,3 +348,7 @@ h5 {
 .menu{
     background-color: white;
 }
+
+.required{
+    color: red;
+}

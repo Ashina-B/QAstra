@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ProjectsService } from '../../services/projects';
-import { error } from '@ant-design/icons-angular';
 import { AlertComponent } from '../../shared_components/alert/alert.component';
-
+import { EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-create-project',
   imports: [CommonModule, ReactiveFormsModule, AlertComponent],
@@ -19,6 +18,7 @@ export class CreateProjectComponnet {
   isVisible: boolean = false;
   project: any;
   @ViewChild(AlertComponent) appAlert!: AlertComponent;
+  @Output() projectCreated = new EventEmitter<any>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,6 +58,7 @@ export class CreateProjectComponnet {
           response.message,
           "success"
         );
+        this.projectCreated.emit()
         this.createProjectForm.reset();
       },
       error: (error) => {
@@ -70,4 +71,5 @@ export class CreateProjectComponnet {
       }
     })
   }
+
 }
