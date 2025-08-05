@@ -20,6 +20,6 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'activate-account', component:AccountActivationComponent},
     {path: 'reset-password', component:ResetPasswordComponent},
-    {path: "projects", component: ProjectsComponent},
-    {path: "create-project", component: CreateProjectComponnet}
+    {path: "projects", component: ProjectsComponent, canActivate: [authGuard]},
+    {path: "create-project", component: CreateProjectComponnet, canActivate: [authGuard]}
 ];

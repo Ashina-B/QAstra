@@ -42,3 +42,27 @@ exports.getProjects = async(req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 }
+
+exports.getUserProjects = async(req, res) => {
+    try{
+        const user_id = req.query.user_id;
+
+        const pool = await poolPromise;
+
+        const result = await pool.request()
+            .input('user_id', user_id)
+            .execute('getUserProjects');
+
+        const projects = result.recordset.map(project => {
+            return {
+                ...project,
+                members: JSON.parse(project.members || '[]')
+            };
+        });
+
+        res.status(200).json(projects);
+    }catch (error){
+        console.error('Error getting projects:', error);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+}

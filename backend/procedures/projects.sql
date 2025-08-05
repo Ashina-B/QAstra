@@ -66,3 +66,43 @@ BEGIN
 ) AS members;
 END
 GO
+
+CREATE OR ALTER PROCEDURE getUserProjects
+    @user_id NVARCHAR(36)
+AS
+BEGIN
+    SELECT
+        p.project_id,
+        p.name,
+        p.created_at,
+        (SELECT COUNT(*) FROM test_suites ts WHERE ts.project_id = p.project_id) AS test_suite_count,
+        (SELECT COUNT(*) 
+         FROM test_cases tc 
+         JOIN test_suites ts ON tc.suite_id = ts.suite_id
+         WHERE ts.project_id = p.project_id) AS test_case_count,
+        (SELECT COUNT(*) FROM test_runs tr WHERE tr.project_id = p.project_id) AS test_run_count,
+        ISNULL(members.members_json, '[]') AS members
+    FROM projects p
+    INNER JOIN project_members pm_filter ON pm_filter.project_id = p.project_id
+
+    OUTER APPLY (
+        SELECT (
+            SELECT
+                u.user_id,
+                u.username AS user_name,
+                u.email,
+                r.name AS role
+            FROM project_members pm
+            JOIN users u ON u.user_id = pm.user_id
+            JOIN roles r ON r.role_id = pm.role_id
+            WHERE pm.project_id = p.project_id
+            FOR JSON PATH
+        ) AS members_json
+    ) AS members
+
+    WHERE pm_filter.user_id = @user_id;
+END
+GO
+
+
+

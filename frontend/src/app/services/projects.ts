@@ -38,4 +38,17 @@ export class ProjectsService {
         return of([])
       }
   }
+
+  getUserProjects(user_id: string): Observable<any> {
+    if (isPlatformBrowser(this.platformId)){
+      const token = this.authService.getToken();
+      return this.http.get(`${this.apiUrl}/getUserProjects?user_id=${user_id}`,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+      }else{
+        return of([])
+      }
+  }
 }
