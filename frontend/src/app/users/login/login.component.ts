@@ -89,7 +89,7 @@ export class LoginComponent {
 
         this.authService.loginUser(this.userCreds, this.keep_me_signed_in).subscribe({
           next: () => {
-            this.router.navigate([''])
+            this.router.navigate(['/projects'])
           },
           error: (error) => {
             this.isSubmitting = false;
