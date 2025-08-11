@@ -6,11 +6,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { NavBarComponent } from '../home/nav-bar/nav-bar.component';
+import { NavBarComponent } from '../projects/project-details/nav-bar/nav-bar.component';
 import { UsersService } from '../services/users.service';
 import { CreateProjectComponnet } from "./create-project/create-project";
 import { AuthService } from '../services/auth.service';
-import { error } from '@ant-design/icons-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -31,7 +31,7 @@ export class ProjectsComponent {
     { icon: 'delete', title: 'Delete project', color: 'warn' }
   ];
 
-  constructor(private projectsService: ProjectsService, public usersService: UsersService, private authService: AuthService){}
+  constructor(private projectsService: ProjectsService, public usersService: UsersService, private authService: AuthService, private router:Router){}
 
   ngOnInit(){
     this.user_id = this.authService.getUserId();
@@ -63,5 +63,9 @@ export class ProjectsComponent {
         }
       });
     }
+  }
+
+  goToProject(projectName: string){
+    this.router.navigate([`project/${projectName}/project-overview`]);
   }
 }

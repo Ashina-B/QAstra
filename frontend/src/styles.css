@@ -266,27 +266,34 @@ a {
     min-height: 60px;
     border-bottom: 1px solid rgb(240, 240, 240);
     position: fixed;
-    left: 260px;
+    /* left: 260px; */
     right: 0;
     top: 0;
     z-index: 1025;
     display: flex;
 }
 
+.expanded-header {
+  left: 260px;
+  transition: margin-left 0.3s ease;
+}
+
+.collapsed-header {
+  left: 0; 
+  transition: margin-left 0.3s ease;
+}
+
 .pc-footer {
     position: relative;
     z-index: 995;
-    margin-left: 260px;
-    margin-top: 60px;
     background: #fafafb;
     padding: 12px 48px;
 }
 
 .pc-container {
     position: relative;
-    top: 60px;
-    margin-left: 260px;
-    min-height: calc(100vh - 113px);
+    /* margin-left: 260px; */
+    min-height: calc(100vh - 150px);
     background: #fafafb;
     width: -webkit-fill-available;
 }
@@ -352,3 +359,39 @@ h5 {
 .required{
     color: red;
 }
+
+.nav-item{
+    margin-left: 1rem;
+}
+
+.coded-menu-caption{
+    color: #2F80ED;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.coded-mtext{
+    color: #333333;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.coded-mtext:hover{
+    color: #1565C0;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.coded-mtext:active{
+    color: #1E88E5;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.navbar-collapsed {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+

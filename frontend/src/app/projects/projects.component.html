@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let project of projects" >
+                <tr *ngFor="let project of projects" (click)="goToProject(project.name)">
                     <td>{{project.name}}</td>
                     <td>{{project.test_suite_count}}</td>
                     <td>{{project.test_case_count}}</td>
