@@ -3,6 +3,7 @@ import { ProjectDetailsComponent } from './project-details.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { convertToParamMap } from '@angular/router';
 
 describe('HomeComponent', () => {
   let component: ProjectDetailsComponent;
@@ -15,8 +16,13 @@ describe('HomeComponent', () => {
               {
                 provide: ActivatedRoute,
                 useValue: {
-                  params: of({}),
-                  queryParams: of({}),
+                  params: of({
+                    get: (key: string) => key === 'projectName' ? 'Test Project' : null
+                  }),
+                  queryParams: of({
+                    get: () => null
+                  }),
+                  paramMap: of(convertToParamMap({ projectName: 'Test Project' })),
                   snapshot: {
                     data: {},
                     paramMap: new Map(),

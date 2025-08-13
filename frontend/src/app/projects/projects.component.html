@@ -31,20 +31,20 @@
             <thead>
                 <tr>
                     <th>Project Name</th>
-                    <th>Test Suites</th>
-                    <th>Test Cases</th>
-                    <th>Test Runs</th>
-                    <th>Members</th>
+                    <th style="text-align: center;">Test Suites</th>
+                    <th style="text-align: center;">Test Cases</th>
+                    <th style="text-align: center;">Test Runs</th>
+                    <th style="text-align: center;">Members</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let project of projects" (click)="goToProject(project.name)">
-                    <td>{{project.name}}</td>
-                    <td>{{project.test_suite_count}}</td>
-                    <td>{{project.test_case_count}}</td>
-                    <td>{{project.test_run_count}}</td>
-                    <td>
+                <tr *ngFor="let project of projects">
+                    <td (click)="goToProject(project.name)">{{project.name}}</td>
+                    <td (click)="goToProject(project.name)" style="text-align: center;">{{project.test_suite_count}}</td>
+                    <td (click)="goToProject(project.name)" style="text-align: center;">{{project.test_case_count}}</td>
+                    <td (click)="goToProject(project.name)" style="text-align: center;">{{project.test_run_count}}</td>
+                    <td (click)="goToProject(project.name)" style="text-align: center;">
                         <div *ngFor="let member of project.members" class="btn btn-primary">
                             {{usersService.getInitials(member.user_name)}}
                         </div>

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavItemComponent } from './nav-item.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
 describe('NavItemComponent', () => {
@@ -16,6 +16,7 @@ describe('NavItemComponent', () => {
           useValue: {
             params: of({}),
             queryParams: of({}),
+            paramMap: of(convertToParamMap({ projectName: 'Test Project' })),
             snapshot: {
               data: {},
               paramMap: new Map(),
