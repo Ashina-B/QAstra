@@ -1,1 +1,33 @@
-<p>general works!</p>
+<div>
+    <h5>Settings</h5>
+    <app-alert></app-alert>
+    <div class="tab-menu">
+        <div class="tab-item active">
+            <p >General Settings</p>
+        </div>
+        <div (click)="goToAccesControlSetting()">
+            <p class="tab-item">Access Control</p>
+        </div>
+    </div>
+    <form [formGroup] ="editProjectForm" (ngSubmit)="onSubmit()">
+        <div class="form-group mb-3">
+            </div>
+             <div class="form-group mb-3">
+                <div class="error-message" *ngIf="editProjectForm.get('projectName')?.invalid && editProjectForm.get('projectName')?.touched">
+                  <span id="projectName-error-message">A project name is required</span>
+                </div>
+                <label class="form-label" for="projectName">Project Name  <span class="required">*</span></label>
+                <input type="text" formControlName="projectName" class="form-control" id="projectname" placeholder="Project Name"/>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="projectDescription">Project Description</label>
+                <textarea rows="5" formControlName="projectDescription" class="form-control" id="projectDescription" placeholder="Write a few sentences about your project"></textarea>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || editProjectForm.invalid">Edit Project Details</button>
+              </div>
+              <div class="error-message" *ngIf="errorMessage">
+                <span>{{errorMessage}}</span>
+              </div>
+    </form>
+</div>

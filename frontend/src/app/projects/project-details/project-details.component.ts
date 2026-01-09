@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ProjectsService } from '../../services/projects';
 
 @Component({
   selector: 'app-home',
@@ -14,15 +15,29 @@ import { NavigationComponent } from './navigation/navigation.component';
 export class ProjectDetailsComponent {
   navCollapsed = false;
   navCollapsedMob = false;
-  projectName: string | undefined;
+  projectId: string | undefined;
+  project: any;
+  error_message: string| undefined;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router, private projectsService: ProjectsService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.projectName = params.get('projectName')!;
-      console.log('Project Name:', this.projectName);
+      this.projectId = params.get('projectId')!;
+      // console.log('Project ID:', this.projectId);
     });
+
+    if (this.projectId){
+      this.projectsService.getProjectDetails(this.projectId).subscribe( {
+        next: (response: any) => {
+          this.project = response;
+          // console.log('Project Details', this.project)
+        },
+        error: (error) => {
+          this.error_message = error.error.message
+        }
+      });
+    }
   }
 
   navMobClick() {
@@ -41,5 +56,9 @@ export class ProjectDetailsComponent {
     if (event.key === 'Escape') {
       this.closeMenu();
     }
+  }
+
+  goToEditProject(projectName: string, url:string){
+    this.router.navigate([`project/${projectName}/${url}`]);
   }
 }

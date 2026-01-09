@@ -26,9 +26,9 @@ export class ProjectsComponent {
   error_message: string | null = null;
 
   options = [
-    { icon: 'visibility', title: 'View project', color: 'primary' },
-    { icon: 'edit', title: 'Edit Project',color: 'accent' },
-    { icon: 'delete', title: 'Delete project', color: 'warn' }
+    { icon: 'visibility', title: 'View project', url: '' },
+    { icon: 'edit', title: 'Edit Project', url: "settings/general" },
+    { icon: 'delete', title: 'Delete project',  url: '/projects' }
   ];
 
   constructor(private projectsService: ProjectsService, public usersService: UsersService, private authService: AuthService, private router:Router){}
@@ -65,7 +65,11 @@ export class ProjectsComponent {
     }
   }
 
-  goToProject(projectName: string){
-    this.router.navigate([`project/${projectName}/project-overview`]);
+  goToProject(projectId: string){
+    this.router.navigate([`project/${projectId}/project-overview`]);
+  }
+
+  goToSelectedOption(projectId: string, url:string){
+    this.router.navigate([`project/${projectId}/${url}`]);
   }
 }

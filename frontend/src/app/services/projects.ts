@@ -39,10 +39,37 @@ export class ProjectsService {
       }
   }
 
+  getProjectDetails(project_id: string): Observable<any>{
+    if (isPlatformBrowser(this.platformId)){
+      const token = this.authService.getToken();
+      return this.http.get(`${this.apiUrl}/getProjectDetails?project_id=${project_id}`,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+      }else{
+        return of([])
+      }
+  }
+
   getUserProjects(user_id: string): Observable<any> {
     if (isPlatformBrowser(this.platformId)){
       const token = this.authService.getToken();
       return this.http.get(`${this.apiUrl}/getUserProjects?user_id=${user_id}`,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+      }else{
+        return of([])
+      }
+  }
+
+  updateProjectDetails(project_id:string, requestData:any): Observable<any> {
+    console.log(`${this.apiUrl}/updateProjectDetails?project_id=${project_id}`)
+    if (isPlatformBrowser(this.platformId)){
+      const token = this.authService.getToken();
+      return this.http.patch(`${this.apiUrl}/updateProjectDetails?project_id=${project_id}`, requestData, {
           headers: {
             Authorization: `Bearer ${token}`
           }

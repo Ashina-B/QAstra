@@ -19,7 +19,7 @@ import { AccessControl } from './projects/project-details/project-settings/acces
 
 export const routes: Routes = [
     {path: '', redirectTo: 'projects', pathMatch: 'full' },
-    {path: 'project/:projectName', component: ProjectDetailsComponent, 
+    {path: 'project/:projectId', component: ProjectDetailsComponent, 
         children:[
             {path: "project-overview", component: ProjectOverview},
             {path: "test-suites", component: TestSuites},

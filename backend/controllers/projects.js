@@ -66,3 +66,75 @@ exports.getUserProjects = async(req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 }
+
+exports.getProjectDetails = async (req, res) => {
+    try {
+        const project_id = req.query.project_id;
+
+        const pool = await poolPromise;
+
+        const result = await pool.request()
+            .input('project_id', project_id )
+            .execute('getProject');
+
+        const project = result.recordset.map(project => {
+            return {
+                project,
+                members: JSON.parse(project.members || '[]')
+            };
+        });
+
+        res.status(200).json(project);
+
+    } catch (error) {
+        console.error('Error getting project details:', error);
+        res.status(500).json({ 
+            message: 'Internal Server Error', 
+            error: error.message 
+        });
+    }
+};
+
+exports.updateProjectDetails = async (req, res) => {
+    try {
+        const project_id = req.query.project_id;
+        const { name, description } = req.body;
+
+        if (!name && !description) {
+            return res.status(400).json({
+                message: 'At least one field (name or description) must be provided.'
+            });
+        }
+
+        const pool = await poolPromise;
+
+        console.log('Executing stored procedure: updateProjectDetails');
+        console.log('Parameters:', {
+            project_id: project_id,
+            name: name ?? null,
+            description: description ?? null
+        });
+
+        await pool.request()
+            .input('project_id', project_id)
+            .input('name', name ?? null)
+            .input('description', description ?? null)
+            .execute('updateProjectDetails');
+
+        res.status(200).json({ message: 'Project updated successfully' });
+
+    } catch (error) {
+        console.error('Error updating project:', error);
+
+        if (error.message.includes('Project not found')) {
+            return res.status(404).json({ message: error.message});
+        }
+
+        res.status(500).json({
+            message: 'Internal Server Error',
+            error: error.message
+        });
+    }
+};
+
+

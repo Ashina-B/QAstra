@@ -1,6 +1,6 @@
 @if (item.url && !item.external) {
   <li [ngClass]="item.classes!" [routerLinkActive]="['active']">
-    <a [target]="item.target ? '_blank' : '_self'" [routerLink]="[`/project/${projectName}/${item.url}`]" (click)="closeOtherMenu($event)">
+    <a [target]="item.target ? '_blank' : '_self'" [routerLink]="[`/project/${projectId}/${item.url}`]" (click)="closeOtherMenu($event)">
       @if (item.icon) {
         <span class="coded-micon">
           <i [ngClass]="item.icon"></i>
