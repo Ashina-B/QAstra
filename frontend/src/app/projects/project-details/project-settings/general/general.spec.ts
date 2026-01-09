@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { General } from './general';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter, ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('General', () => {
   let component: General;
@@ -8,7 +11,25 @@ describe('General', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [General]
+      imports: [General],
+      providers: [
+      provideHttpClient(),
+      provideHttpClientTesting(),
+      provideRouter([]), 
+      {
+        provide: ActivatedRoute,
+        useValue: {
+          paramMap: of({
+            get: (key: string) => key === 'projectId' ? '123' : null
+          }),
+          parent: {
+            paramMap: of({
+              get: () => '123'
+            })
+          }
+        }
+      }
+    ]
     })
     .compileComponents();
 
@@ -21,3 +42,4 @@ describe('General', () => {
     expect(component).toBeTruthy();
   });
 });
+
