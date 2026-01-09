@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../../services/auth.service';
 import { ProjectsService } from '../../../../services/projects';
 import { AlertComponent } from '../../../../shared_components/alert/alert.component';
 import { CommonModule } from '@angular/common';
@@ -25,7 +24,6 @@ export class General {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
     private router: Router
