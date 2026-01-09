@@ -1,0 +1,28 @@
+.tab-menu{
+    display: flex;
+    gap: 1rem;
+}
+
+.tab-item{
+    padding: 1rem 1rem 0;
+    cursor: pointer;
+}
+
+.active{
+    background-color: white;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+form{
+    background-color: white;
+    padding: 2rem;
+    width: 75vw;
+    height: 66vh;
+}
+
+.btn-primary{
+    width: 25%;
+}
+
+

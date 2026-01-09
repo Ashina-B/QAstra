@@ -40,11 +40,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let project of projects">
-                    <td (click)="goToProject(project.name)">{{project.name}}</td>
-                    <td (click)="goToProject(project.name)" style="text-align: center;">{{project.test_suite_count}}</td>
-                    <td (click)="goToProject(project.name)" style="text-align: center;">{{project.test_case_count}}</td>
-                    <td (click)="goToProject(project.name)" style="text-align: center;">{{project.test_run_count}}</td>
-                    <td (click)="goToProject(project.name)" style="text-align: center;">
+                    <td (click)="goToProject(project.project_id)">{{project.name}}</td>
+                    <td (click)="goToProject(project.project_id)" style="text-align: center;">{{project.test_suite_count}}</td>
+                    <td (click)="goToProject(project.project_id)" style="text-align: center;">{{project.test_case_count}}</td>
+                    <td (click)="goToProject(project.project_id)" style="text-align: center;">{{project.test_run_count}}</td>
+                    <td (click)="goToProject(project.project_id)" style="text-align: center;">
                         <div *ngFor="let member of project.members" class="btn btn-primary">
                             {{usersService.getInitials(member.user_name)}}
                         </div>
@@ -56,8 +56,8 @@
 
                         <mat-menu #moreMenu="matMenu">
                         <div *ngFor="let task of options" class="menu">
-                                <button mat-menu-item>
-                                <mat-icon class="text-muted" [color]="task.color">{{ task.icon }}</mat-icon>
+                                <button mat-menu-item (click)="goToSelectedOption(project.project_id, task.url)">
+                                <mat-icon class="text-muted">{{ task.icon }}</mat-icon>
                                 <span>{{ task.title }}</span>
                                 </button>
                             </div>

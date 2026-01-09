@@ -13,14 +13,14 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 export class NavItemComponent {
   // public props
   @Input() item!: NavigationItem;
-  projectName: string | undefined;
+  projectId: string | undefined;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.projectName = params.get('projectName')!;
-      console.log('Project Name:', this.projectName);
+      this.projectId = params.get('projectId')!;
+      // console.log('Project ID:', this.projectId);
     });
   }
 
