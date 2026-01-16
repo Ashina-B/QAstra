@@ -157,6 +157,13 @@ CREATE TABLE project_members (
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+--Add isActive and activation token columns
+ALTER TABLE project_members 
+ADD is_active BIT DEFAULT 0;
+
+ALTER TABLE project_members 
+ADD activation_token VARCHAR(255);
+
 --remove the role column from users table
 ALTER TABLE users
 DROP CONSTRAINT FK__users__role_id__412EB0B6;
@@ -170,6 +177,7 @@ FROM sys.indexes
 WHERE object_id = OBJECT_ID('projects') AND is_unique = 1;
 
 ALTER TABLE projects DROP CONSTRAINT UQ__projects__72E12F1BA12BD738;
+
 
 
 

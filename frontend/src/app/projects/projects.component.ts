@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
-  @ViewChild(CreateProjectComponnet) creatProject!: CreateProjectComponnet;
+  @ViewChild(CreateProjectComponnet) createProject!: CreateProjectComponnet;
   projects: any[] = [];
   user_id: string | null = null;
   error_message: string | null = null;
@@ -48,7 +48,7 @@ export class ProjectsComponent {
   }
 
   open_create_project(){
-    this.creatProject.displayForm();
+    this.createProject.displayForm();
   }
 
   onProjectCreated() {

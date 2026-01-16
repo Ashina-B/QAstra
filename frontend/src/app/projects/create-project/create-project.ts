@@ -58,7 +58,7 @@ export class CreateProjectComponnet {
           response.message,
           "success"
         );
-        this.projectCreated.emit()
+        this.projectCreated.emit();
         this.createProjectForm.reset();
       },
       error: (error) => {

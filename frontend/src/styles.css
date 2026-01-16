@@ -374,13 +374,13 @@ h5 {
 .coded-mtext{
     color: #333333;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .coded-mtext:hover{
     color: #1565C0;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .coded-mtext:active{

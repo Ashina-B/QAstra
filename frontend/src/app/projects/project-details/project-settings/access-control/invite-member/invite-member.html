@@ -1,0 +1,25 @@
+<div class="container" [hidden]="!isVisible">
+  <app-alert></app-alert>
+    <div class="card">
+        <form [formGroup] ="inviteMemberForm" (ngSubmit)="onSubmit()">
+            <div class="form-title">
+                <h5>Invite A Member</h5>
+                <i class="fa fa-window-close" aria-hidden="true" style="font-size: 24px;" (click)="closeForm()"></i>
+            </div>
+             <div class="form-group mb-3">
+                <div class="error-message" *ngIf="inviteMemberForm.get('emailAddress')?.invalid && inviteMemberForm.get('emailAddress')?.touched">
+                  <span id="emailAddress-error-message">Email address is required</span>
+                </div>
+                <label class="form-label" for="emailAddress">Email Address  <span class="required">*</span></label>
+                <input type="text" formControlName="emailAddress" class="form-control" id="email" placeholder="Email Address"/>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || inviteMemberForm.invalid">Invite member</button>
+              </div>
+              <div class="error-message" *ngIf="errorMessage">
+                <span>{{errorMessage}}</span>
+              </div>
+        </form>
+    </div>
+</div>
+

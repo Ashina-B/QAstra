@@ -84,7 +84,7 @@ export class General {
               response.message,
               "success"
             );
-            this.projectUpdated.emit()
+            this.projectUpdated.emit();
           },
           error: (error) => {
             this.isSubmitting = false

@@ -26,11 +26,11 @@ GO
 CREATE OR ALTER PROCEDURE addProjectMember
     @project_id NVARCHAR(36),
     @user_id NVARCHAR(255),
-    @role_id NVARCHAR(36)
+    @role_id NVARCHAR(36),
 AS
 BEGIN
-	INSERT INTO project_members(project_id, user_id, role_id) 
-	VALUES (@project_id, @user_id, @role_id)
+	INSERT INTO project_members(project_id, user_id, role_id, is_active) 
+	VALUES (@project_id, @user_id, @role_id, 1)
 END
 GO
 
@@ -168,8 +168,6 @@ BEGIN
     WHERE project_id = @project_id;
 END
 GO
-
-select * from projects where project_id = '878798F5-B2D4-42FD-B057-29A9DF049CAF'
 
 
 

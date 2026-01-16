@@ -138,3 +138,40 @@ exports.updateProjectDetails = async (req, res) => {
 };
 
 
+exports.inviteProjectMember =  async(req, res) => {
+    const { email, projectId } = req.body;
+    const token = generateToken(email);
+
+    try {
+        const pool = await poolPromise;
+
+        const roleId = await pool.request().input('name', 'member').query('SELECT role_id FROM roles WHERE name = @name');
+        const userId = await pool.request().input('email', email).query('SELECT user_id FROM users WHERE email = @email');
+
+        await pool.request()
+            .input('user_id', userId)
+            .input('project_id', projectId)
+            .input('role_id', roleId)
+            .execute('addProjectMember');
+
+        if (exists.recordset.length === 0) {
+            return res.status(400).json({ message: "User does not exist" });
+        }   
+
+        await pool.request()
+            .input('token', token)
+            .input('email', email)
+            .input('expiry', expiry)
+            .query('UPDATE users SET reset_token = @token, reset_token_expiry = @expiry WHERE email = @email')
+    
+        await emailContoller.sendResetEmail(email, token);
+
+        res.json({ message: 'Reset email sent successfully.', token: token});
+
+      } catch (err) {
+        console.log(err)
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+}
+
+

@@ -1,0 +1,46 @@
+.tab-menu{
+    display: flex;
+    gap: 1rem;
+}
+
+.tab-item{
+    padding: 1rem 1rem 0;
+    cursor: pointer;
+}
+
+.active{
+    background-color: white;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+form{
+    background-color: white;
+    padding: 2rem;
+    width: 75vw;
+    height: 66vh;
+}
+
+
+.table-card .dataTable-top, .table-card .datatable-bottom {
+    width: 75vw;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 3rem 0rem 3rem;
+}
+
+/* .card {
+    margin-bottom: 24px;
+    transition: box-shadow .2s ease-in-out;
+} */
+
+.actions{
+  display: flex;
+  gap: 1rem;
+}
+
+.create_project{
+  align-content: center;
+}

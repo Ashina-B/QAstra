@@ -32,16 +32,6 @@ exports.sendRegistrationEmail = async (req, res, next) => {
       return res.json({ message: "Account is already Active" })
     }  
 
-    // const transporter = nodemailer.createTransport({
-    //   host: "smtp.ethereal.email",
-    //   port: 587,
-    //   secure: false,
-    //   auth: {
-    //     user: testAccount.user,
-    //     pass: testAccount.pass,
-    //   },
-    // });
-
     const templatePath = path.join(__dirname, '../Email Templates/registrationEmail.html')
     let emailTemplate = fs.readFileSync(templatePath, 'utf-8')
     const activationLink = `${frontendURL}/activate-account?token=${token}`;
@@ -145,6 +135,23 @@ exports.sendResetEmail = async (email, token) => {
 
   await transporter.sendMail(mailOptions);
 
+};
+
+exports.sendInviteProjectMember = async (email, token, projectName) => {
+  const templatePath = path.join(__dirname, '../Email Templates/inviteProjectMember.html')
+  let emailTemplate = fs.readFileSync(templatePath, 'utf-8')
+  const activationLink = `${frontendURL}/invite-memmber?token=${token}`;
+  emailTemplate = emailTemplate.replace('{{activationLink}}', activationLink)
+  emailTemplate = emailTemplate.replace('{{projectName}}', projectName)
+
+  const mailOptions = {
+    from: '"QAstra" <ashinabarasa91@gmail.com>',
+    to: email,
+    subject: 'Project Invitation',
+    html: emailTemplate,
+  };
+
+  await transporter.sendMail(mailOptions);
 };
 // felixkpt@gmail.com
 
