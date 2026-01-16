@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClient } from '@angular/common/http';
 import { InviteMemberComponent } from './invite-member';
 
 describe('InviteMember', () => {
@@ -8,7 +8,8 @@ describe('InviteMember', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InviteMemberComponent]
+      imports: [InviteMemberComponent],
+      providers: [ provideHttpClient() ]
     })
     .compileComponents();
 

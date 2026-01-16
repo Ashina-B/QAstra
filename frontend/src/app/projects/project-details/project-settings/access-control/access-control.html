@@ -42,7 +42,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let member of project[0].members">
+                                    <tr *ngFor="let member of project?.[0]?.members">
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div class="btn btn-primary">
